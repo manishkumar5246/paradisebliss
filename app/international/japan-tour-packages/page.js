@@ -16,11 +16,12 @@ const tours = [
     title: "Tokyo & Kyoto Cultural Escape",
     dates: ["Mar 15", "Apr 01", "May 10"],
     prices: ["Starting ₹1,49,990*", "₹1,29,990*"],
-    image: "/optimised/japan.webp",
+    image: "/optimised/tokyo.webp",
     duration: "10D/9N",
     group: "Group Tour",
     link: "/trip-packages/tokyo-kyoto-osaka-10-day-cultural-tour",
   },
+
   // Add more tours with unique `link` paths
 ];
 

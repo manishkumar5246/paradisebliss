@@ -37,7 +37,7 @@ const Footer = () => {
                 className="hover:scale-125 transition-transform duration-100 ease-in-out"
               />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/paradiseblisstours?igsh=YXZpaHE3ZHBxZ3gy" target="_blank" rel="noopener noreferrer">
               <Image
                 src="https://raw.githubusercontent.com/aryanrajput955/icons_paradise/refs/heads/main/instagram2.png" // Replace with Instagram icon path
                 alt="Instagram"

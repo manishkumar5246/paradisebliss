@@ -8,12 +8,12 @@ import Image from 'next/image';
 import { memo } from 'react';
 
 // Updated images for Japan theme (replace with actual image paths)
-const heroImage = "/img/japan/tokyo-skyline.jpg";
+const heroImage = "/optimised/food-japan.png";
 const highlightImages = [
-  "/img/japan/shibuya.jpg",
-  "/img/japan/fushimi-inari.jpg",
-  "/img/japan/universal-studios.jpg",
-  "/img/japan/dotonbori.jpg",
+  "/optimised/tokyo.webp",
+  "/optimised/japan2.jpeg",
+  "/optimised/japanstudio.jpeg",
+  "/optimised/food-japan.png",
 ];
 const rightSideImage = "/img/logo.png";
 

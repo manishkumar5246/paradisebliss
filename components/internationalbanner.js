@@ -1,159 +1,159 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 export default function InternationalSlider() {
   const banners = [
-    {
-      id: 1,
-      alt: 'Bali Banner',
-      image: '/optimised/Bali_Banner.webp'
-    },
-    {
-      id: 2,
-      alt: 'Dubai Banner',
-      image: '/optimised/Dubai_Banner (1).png'
-    },
-    {
-      id: 3,
-      alt: 'Georgia Banner',
-      image: '/optimised/Georgia_Banner.webp'
-    },
-    {
-      id: 4,
-      alt: 'Thailand Banner',
-      image: '/optimised/Thailand_Banner.webp'
-    },
-    {
-      id: 5,
-      alt: 'Vietnam Banner',
-      image: '/optimised/Vietnam_Banner.png'
-    }
+    { id: 1, alt: 'Bali Banner', image: '/optimised/b.webp', href: '/international/bali-tour-packages' },
+    { id: 2, alt: 'Dubai Banner', image: '/optimised/d.webp', href: '/international/dubai-tour-packages' },
+    { id: 4, alt: 'Thailand Banner', image: '/optimised/t.webp', href: '/international/thailand-tour-packages' },
+    { id: 5, alt: 'Vietnam Banner', image: '/optimised/v.webp', href: '/international/vietnam-tour-packages' },
   ];
 
+  const [mobileHeights, setMobileHeights] = useState({});
+  const [isMobile, setIsMobile] = useState(false);
+  const imgRefs = useRef([]);
+
+  useEffect(() => {
+    const updateDimensions = () => {
+      const currentIsMobile = window.innerWidth < 640;
+      setIsMobile(currentIsMobile);
+
+      if (!currentIsMobile) {
+        setMobileHeights({});
+        return;
+      }
+
+      const heights = {};
+      imgRefs.current.forEach((img, index) => {
+        if (img && img.naturalWidth && img.naturalHeight) {
+          const containerWidth = img.parentElement?.clientWidth || img.clientWidth;
+          const aspectRatio = img.naturalHeight / img.naturalWidth;
+          heights[index] = Math.round(containerWidth * aspectRatio);
+        }
+      });
+      setMobileHeights(heights);
+    };
+
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+
+    imgRefs.current.forEach((img) => {
+      if (img) {
+        if (img.complete) {
+          updateDimensions();
+        } else {
+          img.onload = updateDimensions;
+        }
+      }
+    });
+
+    return () => {
+      window.removeEventListener('resize', updateDimensions);
+    };
+  }, [banners.length]);
+
   return (
-    <div className="relative w-full py-8 px-4">
+    <div className="relative w-screen py-8 px-0 overflow-hidden">
       <style jsx global>{`
-        .international-slider .swiper-pagination {
-          position: relative;
-          margin-top: 0;
+        .international-pagination {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+          min-height: 20px;
         }
-        .international-slider .swiper-pagination-bullet {
-          width: 12px;
-          height: 12px;
+        .international-pagination .swiper-pagination-bullet {
           background: #d1d5db;
+          width: 10px;
+          height: 10px;
           opacity: 1;
+          transition: all 0.3s ease;
+          margin: 0 !important;
+          display: inline-block;
+          flex-shrink: 0;
         }
-        .international-slider .swiper-pagination-bullet-active {
-          width: 40px;
-          border-radius: 6px;
-          background: #2563eb;
+        .international-pagination .swiper-pagination-bullet-active {
+          background: #00453A;
+          width: 28px;
+          border-radius: 5px;
         }
-        .international-slider .swiper-button-next,
-        .international-slider .swiper-button-prev {
-          display: none;
+        .swiper-button-disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
         }
       `}</style>
 
-      <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={16}
-        slidesPerView={1}
-        breakpoints={{
-          640: {
-            slidesPerView: 1.2,
-            spaceBetween: 16,
-          },
-          768: {
-            slidesPerView: 1.3,
-            spaceBetween: 20,
-          },
-          1024: {
-            slidesPerView: 1.1,
-            spaceBetween: 24,
-          },
-        }}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-          el: '.custom-pagination',
-        }}
-        navigation={{
-          nextEl: '.custom-next',
-          prevEl: '.custom-prev',
-        }}
-        loop={true}
-        className="w-full international-slider"
-      >
-        {banners.map((banner) => (
-          <SwiperSlide key={banner.id}>
-            <div className="relative h-[200px] md:h-[280px] lg:h-[320px] rounded-xl overflow-hidden shadow-2xl">
-              <img
-                src={banner.image}
-                alt={banner.alt}
-                className="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {/* Full-width slider */}
+      <div className="relative w-full">
+        {/* Nav arrows (centered vertically) */}
+        <button
+          className="international-button-prev absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full hover:scale-110 shadow-lg flex items-center justify-center bg-[#00453A] text-white transition-all cursor-pointer "
+          aria-label="Previous slide"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button
+          className="international-button-next absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full shadow-lg flex items-center justify-center hover:scale-110 cursor-pointer  bg-[#00453A] text-white transition-all duration-300 "
+          aria-label="Next slide"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
 
-      {/* Navigation Controls - Dots Center, Arrows Right */}
-      <div className="flex items-center justify-between mt-6 px-2">
-        {/* Pagination Dots - Center */}
-        <div className="custom-pagination flex-1 flex justify-center"></div>
-        
-        {/* Navigation Buttons - Right */}
-        <div className="flex gap-3">
-          <button
-            className="custom-prev w-11 h-11 rounded-full bg-white border-2 border-gray-200 hover:border-blue-600 hover:bg-blue-50 flex items-center justify-center transition-all duration-200 cursor-pointer"
-            aria-label="Previous slide"
-          >
-            <svg
-              className="w-5 h-5 text-gray-700"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2.5}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
-          <button
-            className="custom-next w-11 h-11 rounded-full bg-white border-2 border-gray-200 hover:border-blue-600 hover:bg-blue-50 flex items-center justify-center transition-all duration-200 cursor-pointer"
-            aria-label="Next slide"
-          >
-            <svg
-              className="w-5 h-5 text-gray-700"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2.5}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
-        </div>
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={0}
+          slidesPerView={1}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          pagination={{ clickable: true, el: '.international-pagination', dynamicBullets: false }}
+          navigation={{ nextEl: '.international-button-next', prevEl: '.international-button-prev' }}
+          loop={true}
+          breakpoints={{
+            0:   { slidesPerView: 1, spaceBetween: 10 },
+            640: { slidesPerView: 1, spaceBetween: 10 },
+            768: { slidesPerView: 1, spaceBetween: 10 },
+            1024:{ slidesPerView: 1.2, spaceBetween: 20 },
+          }}
+          className="w-full"
+        >
+          {banners.map((banner, index) => {
+            const dynamicHeight = isMobile && mobileHeights[index] ? `${mobileHeights[index]}px` : undefined;
+
+            return (
+              <SwiperSlide key={banner.id}>
+                <Link href={banner.href || '#'} className="block cursor-pointer" aria-label={banner.alt}>
+                  <div
+                    className="relative rounded-none md:rounded-xl overflow-hidden shadow-2xl h-[220px] sm:h-[260px] md:h-[420px] lg:h-[520px] xl:h-[360px]"
+                    style={{ height: dynamicHeight }}
+                  >
+                    <img
+                      ref={(el) => { imgRefs.current[index] = el; }}
+                      src={banner.image}
+                      alt={banner.alt}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                </Link>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
       </div>
+
+      {/* Centered dots below */}
+      <div className="international-pagination mt-6"></div>
     </div>
   );
 }
