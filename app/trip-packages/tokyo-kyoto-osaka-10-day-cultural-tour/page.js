@@ -1,169 +1,129 @@
 'use client';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 import { AiOutlineCalendar, AiOutlineDown, AiOutlineUp, AiOutlineStar, AiOutlinePhone } from 'react-icons/ai';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Image from 'next/image';
-import { memo } from 'react';
 
-// Updated images for Japan theme (replace with actual image paths)
-const heroImage = "/optimised/food-japan.png";
+// Images (replace with your actual optimized asset paths)
+const heroImage = "/optimised/kerala-hero.jpg"; // lush backwater / houseboat hero
 const highlightImages = [
-  "/optimised/tokyo.webp",
-  "/optimised/japan2.jpeg",
-  "/optimised/japanstudio.jpeg",
-  "/optimised/food-japan.png",
+  "/optimised/kerala-munnar.jpg",
+  "/optimised/kerala-thekkady.jpg",
+  "/optimised/kerala-houseboat.jpg",
+  "/optimised/kerala-kochi.jpg",
 ];
-const rightSideImage = "/img/logo.png";
+const rightSideImage = "/img/kerala-logo.png"; // small logo or icon
 
-// Quick Facts about Japan Adventure
+// Quick Facts about Kerala Honeymoon
 const quickFacts = [
-  { text: "Tokyo blends ancient temples with cutting-edge technology." },
-  { text: "Kyoto is home to over 2,000 temples and shrines." },
-  { text: "Osaka is known as Japan's kitchen for its street food." },
-  { text: "The Shinkansen bullet train reaches speeds up to 320 km/h." },
+  { text: "Kerala — the 'God's Own Country' — is famed for its serene backwaters, tea-clad hills and spice gardens." },
+  { text: "Munnar is renowned for rolling tea plantations and cool misty vistas." },
+  { text: "Thekkady offers spice plantations and wildlife experiences at Periyar." },
+  { text: "Alleppey (Alappuzha) is famous for romantic houseboat stays on tranquil backwaters." },
 ];
 
-// Itinerary data - Updated for 10-Day Japan Adventure
+// Itinerary data - Lavish Kerala Honeymoon Getaway (5 Days / 4 Nights)
 const itinerary = [
   {
     day: "Day 1",
-    title: "Arrival & Welcome in Tokyo",
-    desc: "Arrive in bustling Tokyo. Settle into your hotel, meet your fellow travelers, enjoy a welcome drink, and dive into the energy of the city with an evening stroll and dinner together."
+    title: "Arrival Kochi → Transfer to Munnar",
+    desc: "Pick-up from Kochi Airport/Railway Station and a scenic drive to Munnar with photo-stops en route. Check-in at a premium resort, relax and enjoy the misty evening at the property."
   },
   {
     day: "Day 2",
-    title: "Tokyo - Tradition Meets Innovation",
-    desc: "After breakfast, explore iconic Tokyo: cross at Shibuya, visit the ancient Senso-ji Temple, experience the immersive digital art at TeamLab, and as night falls, enjoy Tokyo's nightlife with a local pub crawl."
+    title: "Munnar Sightseeing",
+    desc: "Explore tea plantations, viewpoints and waterfalls. Visit a tea factory and enjoy golden-hour views. Evening at leisure — perfect for a romantic resort dinner."
   },
   {
     day: "Day 3",
-    title: "Choose Your Adventure - Mount Fuji or Theme Parks",
-    desc: "Pick your vibe for the day: either glimpse the serene beauty of Mount Fuji and the Five Lakes, or spend fun hours at Disneyland in Tokyo."
+    title: "Munnar → Thekkady",
+    desc: "After breakfast, depart for Thekkady. Explore spice plantations, enjoy a cultural performance or a nature walk. Overnight stay in Thekkady."
   },
   {
     day: "Day 4",
-    title: "Bullet Train to Kyoto",
-    desc: "Travel on the Shinkansen, Japan's high-speed bullet train, enjoying countryside views. Arrive in Kyoto. Enjoy a quiet evening walking tour through beautiful lantern-lit alleys."
+    title: "Thekkady → Alleppey (Houseboat Stay)",
+    desc: "Transfer to Alleppey post-breakfast and check in to a traditional houseboat or luxury waterfront accommodation. Drift through backwaters, enjoy freshly prepared meals and spend a tranquil night aboard."
   },
   {
     day: "Day 5",
-    title: "Kyoto's Spiritual Gems",
-    desc: "Visit the famous Fushimi Inari Shrine with its thousands of torii gates, and stand atop Kiyomizu-dera Temple, soaking in sweeping views of the cityscapes below."
-  },
-  {
-    day: "Day 6",
-    title: "Culture, Tea & Traditions",
-    desc: "Immerse in Japanese culture: participate in a traditional tea ceremony, dress in a kimono, and then take a food walk through Kyoto's hidden alleys to find local flavors and treats."
-  },
-  {
-    day: "Day 7",
-    title: "Off to Osaka - Food & Fun",
-    desc: "Arrive in Osaka, known for its lively street food, friendly vibes, and retro charm. Wander through Shinsekai, sample local bites, and end the day with a karaoke night that lets loose the fun."
-  },
-  {
-    day: "Day 8",
-    title: "Universal Studios Japan",
-    desc: "Spend the day enjoying Universal Studios: ride attractions, explore themed zones like Harry Potter or Super Mario, and indulge your adventurous side."
-  },
-  {
-    day: "Day 9",
-    title: "Nature & Night Lights - Nara & Dotonbori",
-    desc: "Make a morning trip to Nara Park - meet friendly deer and visit ancient temples. Return to Osaka for an evening food walk through the glittering Dotonbori district."
-  },
-  {
-    day: "Day 10",
-    title: "Farewell Japan",
-    desc: "Enjoy your final breakfast together, share memories, and depart from Osaka. Or if you wish, extend your journey and continue exploring."
+    title: "Departure from Kochi",
+    desc: "After breakfast, transfer from Alleppey to Kochi for onward journey. Cherish memories and request add-ons or extensions if you'd like to stay longer."
   },
 ];
 
-// Highlights data - Updated for Japan
+// Highlights data - Kerala
 const highlights = [
-  { title: "Shibuya Crossing & Senso-ji", image: highlightImages[0], desc: "Experience Tokyo's vibrant energy and ancient heritage." },
-  { title: "Fushimi Inari & Kiyomizu-dera", image: highlightImages[1], desc: "Iconic shrines with stunning torii gates and panoramic views." },
-  { title: "Universal Studios Japan", image: highlightImages[2], desc: "Thrilling rides in themed worlds like Harry Potter." },
-  { title: "Dotonbori Food Walk", image: highlightImages[3], desc: "Neon lights and Osaka's famous street food scene." },
+  { title: "Tea Gardens of Munnar", image: highlightImages[0], desc: "Verdant hillscapes, tea walks and cool mountain air — perfect for couples." },
+  { title: "Spices & Wildlife in Thekkady", image: highlightImages[1], desc: "Spice plantations, guided nature walks and optional boat safari at Periyar." },
+  { title: "Houseboat on Alleppey Backwaters", image: highlightImages[2], desc: "Romantic houseboat cruise with private meals and serene canals." },
+  { title: "Heritage Kochi", image: highlightImages[3], desc: "Colonial lanes, Chinese fishing nets and boutique cafes." },
 ];
 
-// FAQ data - Tailored for Japan tour
+// FAQ data - Tailored for Kerala honeymoon
 const faqs = [
-  { question: "What is the group size for this tour?", answer: "Groups are kept small, typically 10-20 travelers, to ensure a personalized experience and foster connections." },
-  { question: "Do I need a visa to visit Japan?", answer: "Visa requirements depend on your nationality. Many countries enjoy visa-free entry for up to 90 days; check with your local Japanese embassy." },
-  { question: "Is travel insurance included?", answer: "No, travel insurance is not included. We strongly recommend purchasing comprehensive coverage for medical, cancellation, and baggage protection." },
-  { question: "What is the accommodation standard?", answer: "6 nights in boutique hotels/serviced apartments and 3 nights in well-rated hostel dormitories – all comfortable, clean, and centrally located." },
-  { question: "Can dietary requirements be accommodated?", answer: "Yes, vegetarian, vegan, and other preferences can be arranged with advance notice during booking." },
-  { question: "What is the best time to book for early bird savings?", answer: "Book at least 3-6 months in advance to secure discounts and availability, especially for peak seasons like cherry blossom or autumn foliage." },
-  { question: "Are airport transfers included?", answer: "No, airport transfers on Day 1 and Day 10 are not included, but we can assist with arrangements upon request." },
-  { question: "What currency should I bring?", answer: "Japanese Yen (JPY). ATMs are widely available, and credit cards are accepted in major cities." },
-  { question: "Is the Mount Fuji or Disneyland option included in the price?", answer: "You choose one; admission to the selected option is included. The other is excluded." },
-  { question: "What is the cancellation policy?", answer: "A sliding scale applies: full refund minus fees if canceled 60+ days prior; partial or none closer to departure. Details provided at booking." },
+  { question: "What does the package include?", answer: "4 nights’ accommodation (2 nights in Munnar, 1 in Thekkady, 1 in Alleppey), breakfasts from Day 2–Day 5, private transfers per itinerary, airport pickup in Kochi, and all tolls/fees as listed." },
+  { question: "Are meals included?", answer: "Breakfasts are included from Day 2 to Day 5. Lunches and dinners are excluded unless specified as part of a specific hotel or houseboat meal plan." },
+  { question: "Is the houseboat private?", answer: "Yes — the standard package includes a private houseboat or private waterfront accommodation for the Alleppey night. Specify preferences at booking." },
+  { question: "Do I need any ID or documents?", answer: "Valid photo ID (passport/Aadhaar/driver’s license) is required at check-in for all hotels and accommodations." },
+  { question: "Can the itinerary be customized?", answer: "Yes, upgrades and customisations (private dinners, spa, extended stays) can be arranged at additional cost." },
+  { question: "What is the cancellation policy?", answer: "Standard ParadiseBliss Tours cancellation policy applies — dates and refund slabs are provided at booking. Early cancellations may get partial or full refunds depending on timing." },
 ];
 
-// Important Information data - Adapted for Japan
+// Important Information data - Inclusions / Exclusions / Notes
 const importantInfo = [
   {
-    title: "Inclusions & Exclusions",
+    title: "Inclusions",
     content: (
-      <div className="space-y-4">
-        <div>
-          <strong className="block mb-2">What's Included:</strong>
-          <ul className="list-disc pl-5 space-y-1">
-            <li>6 nights in boutique hotels / serviced apartments + 3 nights in well-rated hostel dormitories (comfortable, clean).</li>
-            <li>6 breakfasts.</li>
-            <li>Key experiences & entry tickets: Universal Studios, Team Lab, food walks, shrine/temple visits, tea ceremony, and kimono wearing.</li>
-            <li>Bullet-train ride + local travel pass value included.</li>
-            <li>Guided walking tours in Kyoto & Osaka.</li>
-            <li>Experienced group leaders and local guides throughout.</li>
-          </ul>
-        </div>
-        <div>
-          <strong className="block mb-2">What's Not Included:</strong>
-          <ul className="list-disc pl-5 space-y-1">
-            <li>International flights.</li>
-            <li>Option between Mt. Fuji trip or Disneyland admission (you choose one).</li>
-            <li>Airport transfers for the first and last day.</li>
-            <li>Visa fees & documentation.</li>
-            <li>Lunches & dinners unless specified.</li>
-            <li>Anything not listed under 'What's Included'.</li>
-          </ul>
-        </div>
+      <div className="space-y-3">
+        <ul className="list-disc pl-5 space-y-1">
+          <li>4 nights’ accommodation: 2 nights in Munnar, 1 night in Thekkady, 1 night in Alleppey (houseboat or waterfront stay).</li>
+          <li>Breakfast from Day 2 to Day 5.</li>
+          <li>Private transfers & vehicle for inter-city travel as per itinerary (pickup from Kochi).</li>
+          <li>All tolls, parking fees, driver allowances and fuel charges.</li>
+        </ul>
       </div>
     ),
   },
   {
-    title: "Price & Batches",
+    title: "Exclusions",
+    content: (
+      <div>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>Air / train travel to/from Kochi.</li>
+          <li>Lunches, dinners (unless specified), entry fees, and optional activities.</li>
+          <li>Personal expenses like tips, laundry, beverages, and shopping.</li>
+          <li>5% GST and any additional costs due to weather or route changes.</li>
+        </ul>
+      </div>
+    ),
+  },
+  {
+    title: "Price & Booking Notes",
     content: (
       <p>
-        <strong>Double-Sharing Price:</strong> ₹1,44,999 (discounted from ₹1,74,999) - saving approx ₹30,000<br />
-        <em>Early Bird Savings: Discounts apply if booking before certain cut-off dates.</em>
+        <strong>Starting Price (Per Person):</strong> ₹[Insert Starting Price] (price varies by travel dates, room category & availability).<br />
+        <em>Contact us for exact pricing, room upgrades, and private arrangements.</em>
       </p>
     ),
   },
   {
-    title: "Who Should Join & Trip Vibe",
+    title: "Important Notes",
     content: (
-      <p>
-        Perfect for solo travelers, pairs, friends, anime fans, food lovers, and anyone who wants to see both futuristic Japan and its rich traditions. You'll travel with a group that starts as strangers and ends up as friends - lots of laughs, discovery, deep culture, and joy in the journey.
-      </p>
-    ),
-  },
-  {
-    title: "Health & Safety Guidelines",
-    content: (
-      <ul className="list-disc pl-5 space-y-2">
-        <li>Japan is generally safe; follow local laws and group leader advice.</li>
-        <li>Stay hydrated and use sunscreen during outdoor activities.</li>
-        <li>Public transport is efficient; keep your local travel pass handy.</li>
-        <li>In case of emergencies, contact your group leader immediately.</li>
-        <li>Respect cultural etiquette: remove shoes indoors, bow when greeting, and avoid loud conversations on trains.</li>
-      </ul>
+      <div>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>Itinerary may be modified due to local conditions (weather, road closures, etc.).</li>
+          <li>Accommodation upgrades and private meals can be arranged on request.</li>
+          <li>Valid photo ID proof required at check-in.</li>
+          <li>Standard cancellation / date-change policy of ParadiseBliss Tours applies.</li>
+        </ul>
+      </div>
     ),
   },
 ];
 
-// Memoized Highlight Card Component (unchanged)
+// Memoized Highlight Card Component
 const HighlightCard = memo(({ highlight, index, variants }) => (
   <motion.div
     variants={variants}
@@ -182,13 +142,13 @@ const HighlightCard = memo(({ highlight, index, variants }) => (
       quality={75}
     />
     <div className="p-5">
-      <h3 className="text-lg font-semibold text-[#00453A] font-sans">{highlight.title}</h3>
+      <h3 className="text-lg font-semibold text-[#0B5E3B] font-sans">{highlight.title}</h3>
       <p className="text-sm text-gray-600 mt-2 font-sans">{highlight.desc}</p>
     </div>
     <motion.div
       whileHover={{ rotate: 180 }}
       transition={{ duration: 0.3 }}
-      className="absolute top-4 right-4 text-[#F5A623]"
+      className="absolute top-4 right-4 text-[#F59E0B]"
     >
       <AiOutlineStar size={24} />
     </motion.div>
@@ -196,7 +156,7 @@ const HighlightCard = memo(({ highlight, index, variants }) => (
 ));
 HighlightCard.displayName = 'HighlightCard';
 
-export default function JapanAdventurePackage() {
+export default function KeralaHoneymoonPackage() {
   const [openDay, setOpenDay] = useState(null);
   const [openFaq, setOpenFaq] = useState(null);
   const [openInfo, setOpenInfo] = useState(null);
@@ -224,7 +184,8 @@ export default function JapanAdventurePackage() {
   const handleDateChange = useCallback((date) => setFormData(prev => ({ ...prev, date })), []);
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    // Replace with actual submit logic (API call / lead capture)
+    console.log('Kerala booking request submitted:', formData);
     handleCloseModal();
   }, [formData, handleCloseModal]);
 
@@ -252,32 +213,32 @@ export default function JapanAdventurePackage() {
   };
 
   return (
-    <div className="bg-[#F1FDF3] min-h-screen">
-      {/* Hero Section - Updated */}
+    <div className="bg-[#F8FFF7] min-h-screen">
+      {/* Hero Section */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="relative h-[600px] bg-cover bg-center bg-fixed"
+        className="relative h-[560px] bg-cover bg-center bg-fixed"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-[#00453A]/30 flex items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-[#0B5E3B]/20 flex items-center justify-center">
           <div className="text-center text-white px-4">
             <motion.h1
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="text-5xl md:text-7xl font-bold mb-4 font-serif"
+              className="text-4xl md:text-6xl font-bold mb-3 font-serif"
             >
-              10-Day Japan Adventure
+              Lavish Kerala Honeymoon Getaway
             </motion.h1>
             <motion.p
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.4, delay: 0.3 }}
-              className="text-lg md:text-2xl mb-6 font-sans"
+              className="text-md md:text-xl mb-5 font-sans"
             >
-              Paradise Bliss Tours - Tokyo, Kyoto, Osaka
+              5 Days / 4 Nights — Kochi → Munnar → Thekkady → Alleppey → Kochi
             </motion.p>
             <motion.button
               initial={{ y: 20, opacity: 0 }}
@@ -286,22 +247,22 @@ export default function JapanAdventurePackage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleOpenModal}
-              className="bg-[#F1FDF3] text-[#00453A] px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl"
+              className="bg-[#F8FFF7] text-[#0B5E3B] px-6 py-2 rounded-full font-semibold shadow-lg hover:shadow-xl"
             >
-              Book Your Adventure
+              Enquire / Book
             </motion.button>
           </div>
         </div>
       </motion.div>
 
-      {/* Decorative Divider (unchanged) */}
-      <div className="relative h-12 bg-[#00453A]">
-        <svg className="absolute bottom-0 w-full text-[#F1FDF3]" viewBox="0 0 1440 60">
+      {/* Decorative Divider */}
+      <div className="relative h-12 bg-[#0B5E3B]">
+        <svg className="absolute bottom-0 w-full text-[#F8FFF7]" viewBox="0 0 1440 60">
           <path fill="currentColor" d="M0,0L1440,60H0Z"></path>
         </svg>
       </div>
 
-      {/* Trip Overview - Updated with fixed destinations layout */}
+      {/* Trip Overview */}
       <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -314,38 +275,34 @@ export default function JapanAdventurePackage() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-bold text-[#00453A] text-center mb-12 font-serif relative"
+          className="text-3xl md:text-4xl font-bold text-[#0B5E3B] text-center mb-8 font-serif relative"
         >
           Trip Overview
-          <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-16 h-1 bg-[#F5A623]"></span>
+          <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-16 h-1 bg-[#F59E0B]"></span>
         </motion.h2>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 gap-6 bg-gradient-to-br from-white to-[#F1FDF3] p-6 rounded-2xl shadow-xl"
+          className="grid md:grid-cols-2 gap-6 bg-gradient-to-br from-white to-[#F8FFF7] p-6 rounded-2xl shadow-xl"
         >
           <div className="space-y-4">
             <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
-              Embark on a 10-day journey through Japan's highlights with Paradise Bliss Tours. From Tokyo's neon-lit streets to Kyoto's serene temples and Osaka's culinary delights, this group adventure balances tradition, innovation, and fun. Ideal for first-time visitors seeking cultural immersion and new friendships.
+              Indulge in a romantic and refined 5-day honeymoon across Kerala’s best-loved destinations — from misty hill stations to tranquil houseboats. Perfect for newlyweds seeking relaxation, scenic beauty, and intimate experiences.
             </p>
             <ul className="space-y-2 text-gray-700 text-sm sm:text-base">
               <li className="flex items-center">
-                <AiOutlineStar className="text-[#F5A623] mr-2 flex-shrink-0" />
-                <strong className="mr-1">Duration:</strong> 10 Days / 9 Nights
+                <AiOutlineStar className="text-[#F59E0B] mr-2 flex-shrink-0" />
+                <strong className="mr-1">Duration:</strong> 5 Days / 4 Nights
               </li>
               <li className="flex items-center">
-                <AiOutlineStar className="text-[#F5A623] mr-2 flex-shrink-0" />
-                <strong className="mr-1">Destinations:</strong> Tokyo → Kyoto → Osaka (Pick-up in Tokyo / Drop-off in Osaka)
+                <AiOutlineStar className="text-[#F59E0B] mr-2 flex-shrink-0" />
+                <strong className="mr-1">Destinations:</strong> Kochi → Munnar → Thekkady → Alleppey → Kochi
               </li>
               <li className="flex items-center">
-                <AiOutlineStar className="text-[#F5A623] mr-2 flex-shrink-0" />
-                <strong className="mr-1">Price:</strong> ₹1,44,999 (Double-Sharing)
-              </li>
-              <li className="flex items-center">
-                <AiOutlineStar className="text-[#F5A623] mr-2 flex-shrink-0" />
-                <strong className="mr-1">Group Vibe:</strong> Social, adventurous, cultural
+                <AiOutlineStar className="text-[#F59E0B] mr-2 flex-shrink-0" />
+                <strong className="mr-1">Group:</strong> Private / Couple-friendly experiences
               </li>
             </ul>
           </div>
@@ -354,31 +311,31 @@ export default function JapanAdventurePackage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleOpenModal}
-              className="bg-[#00453A] text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-[#00332A] transition-colors"
+              className="bg-[#0B5E3B] text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-[#08492f] transition-colors"
             >
-              Book Now
+              Request Pricing
             </motion.button>
           </div>
         </motion.div>
       </motion.section>
 
-      {/* Itinerary - Updated with Day labels */}
+      {/* Itinerary */}
       <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
         viewport={{ once: true }}
-        className="max-w-5xl mx-auto px-4 py-16 relative"
+        className="max-w-5xl mx-auto px-4 py-12 relative"
       >
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-bold text-[#00453A] text-center mb-12 font-serif relative"
+          className="text-3xl md:text-4xl font-bold text-[#0B5E3B] text-center mb-8 font-serif relative"
         >
           Itinerary
-          <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-16 h-1 bg-[#F5A623]"></span>
+          <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-16 h-1 bg-[#F59E0B]"></span>
         </motion.h2>
         <div className="space-y-4">
           {itinerary.map((item, index) => (
@@ -392,7 +349,7 @@ export default function JapanAdventurePackage() {
             >
               <button
                 onClick={() => toggleDay(index)}
-                className="w-full flex justify-between items-center p-5 text-left bg-gradient-to-r from-[#00453A] to-[#00332A] text-white transition-all hover:from-[#00332A] hover:to-[#00251F]"
+                className="w-full flex justify-between items-center p-5 text-left bg-gradient-to-r from-[#0B5E3B] to-[#08492f] text-white transition-all hover:from-[#08492f] hover:to-[#06371f]"
               >
                 <span className="font-semibold font-sans">{item.day}: {item.title}</span>
                 {openDay === index ? <AiOutlineUp /> : <AiOutlineDown />}
@@ -417,7 +374,7 @@ export default function JapanAdventurePackage() {
         </div>
       </motion.section>
 
-      {/* Highlights (unchanged structure, updated data) */}
+      {/* Highlights */}
       <motion.section
         initial="hidden"
         whileInView="show"
@@ -430,10 +387,10 @@ export default function JapanAdventurePackage() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-bold text-[#00453A] text-center mb-12 font-serif relative"
+          className="text-3xl md:text-4xl font-bold text-[#0B5E3B] text-center mb-10 font-serif relative"
         >
           Trip Highlights
-          <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-16 h-1 bg-[#F5A623]"></span>
+          <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-16 h-1 bg-[#F59E0B]"></span>
         </motion.h2>
         <motion.div
           variants={containerVariants}
@@ -450,7 +407,7 @@ export default function JapanAdventurePackage() {
         </motion.div>
       </motion.section>
 
-      {/* Pricing & Inclusions - Professional pricing display */}
+      {/* Pricing & Inclusions */}
       <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -463,39 +420,38 @@ export default function JapanAdventurePackage() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-bold text-[#00453A] text-center mb-12 font-serif relative"
+          className="text-3xl md:text-4xl font-bold text-[#0B5E3B] text-center mb-8 font-serif relative"
         >
           Pricing & Details
-          <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-16 h-1 bg-[#F5A623]"></span>
+          <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-16 h-1 bg-[#F59E0B]"></span>
         </motion.h2>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 gap-8 bg-gradient-to-br from-white to-[#F1FDF3] p-8 rounded-2xl shadow-xl relative"
+          className="grid md:grid-cols-2 gap-8 bg-gradient-to-br from-white to-[#F8FFF7] p-8 rounded-2xl shadow-xl relative"
         >
           <div>
-            <h3 className="text-2xl font-semibold text-[#00453A] mb-4 font-sans">Pricing (Double-Sharing)</h3>
+            <h3 className="text-2xl font-semibold text-[#0B5E3B] mb-4 font-sans">Pricing</h3>
             <div className="flex items-baseline space-x-3">
-              <span className="text-4xl font-bold text-[#00453A]">₹1,44,999</span>
-              <span className="text-2xl line-through text-gray-500">₹1,74,999</span>
-              <span className="text-lg font-medium text-green-600 bg-green-100 px-3 py-1 rounded-full">Save ₹30,000</span>
+              <span className="text-3xl font-bold text-[#0B5E3B]">₹[Insert Starting Price]</span>
+              <span className="text-sm text-gray-500"> (Per person — varies by season & room)</span>
             </div>
-            <p className="text-sm text-gray-600 mt-2 font-sans">Early bird discounts available for bookings made in advance.</p>
+            <p className="text-sm text-gray-600 mt-2 font-sans">Contact us for exact quotes, room upgrades and private arrangements.</p>
 
-            <h3 className="text-2xl font-semibold text-[#00453A] mt-6 mb-4 font-sans">Key Inclusions</h3>
+            <h3 className="text-2xl font-semibold text-[#0B5E3B] mt-6 mb-4 font-sans">Key Inclusions</h3>
             <ul className="space-y-3 text-gray-700 font-sans">
-              <li className="flex items-center"><AiOutlineStar className="text-[#F5A623] mr-2" /> 6 nights boutique hotels + 3 nights hostels</li>
-              <li className="flex items-center"><AiOutlineStar className="text-[#F5A623] mr-2" /> 6 breakfasts & select experiences</li>
-              <li className="flex items-center"><AiOutlineStar className="text-[#F5A623] mr-2" /> Shinkansen ticket & local passes</li>
-              <li className="flex items-center"><AiOutlineStar className="text-[#F5A623] mr-2" /> Guided tours & group leaders</li>
+              <li className="flex items-center"><AiOutlineStar className="text-[#F59E0B] mr-2" /> 4 nights accommodation across Munnar, Thekkady & Alleppey</li>
+              <li className="flex items-center"><AiOutlineStar className="text-[#F59E0B] mr-2" /> Breakfasts from Day 2–Day 5</li>
+              <li className="flex items-center"><AiOutlineStar className="text-[#F59E0B] mr-2" /> Private transfers, tolls & driver allowances</li>
+              <li className="flex items-center"><AiOutlineStar className="text-[#F59E0B] mr-2" /> Houseboat stay or waterfront accommodation in Alleppey</li>
             </ul>
           </div>
           <div className="flex flex-col items-center gap-2 space-y-4">
-            <div className="w-full max-w-sm bg-white border-2 border-dashed border-[#00453A] rounded-lg p-6 shadow-md">
-              <h4 className="text-xl font-semibold text-[#00453A] font-sans mb-3 flex items-center">
-                <AiOutlineStar className="text-[#F5A623] mr-2" /> Did You Know?
+            <div className="w-full max-w-sm bg-white border-2 border-dashed border-[#0B5E3B] rounded-lg p-6 shadow-md">
+              <h4 className="text-xl font-semibold text-[#0B5E3B] font-sans mb-3 flex items-center">
+                <AiOutlineStar className="text-[#F59E0B] mr-2" /> Did You Know?
               </h4>
               <AnimatePresence mode="wait">
                 <motion.div
@@ -512,7 +468,7 @@ export default function JapanAdventurePackage() {
             </div>
             <Image
               src={rightSideImage}
-              alt="Japan Adventure Icon"
+              alt="Kerala Icon"
               width={150}
               height={150}
               className="object-cover"
@@ -523,7 +479,7 @@ export default function JapanAdventurePackage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleOpenModal}
-              className="bg-[#00453A] text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-[#00332A] transition-colors w-full max-w-xs"
+              className="bg-[#0B5E3B] text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-[#08492f] transition-colors w-full max-w-xs"
             >
               Request Callback
             </motion.button>
@@ -531,7 +487,7 @@ export default function JapanAdventurePackage() {
               href="tel:+918449000181"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-[#F5A623] text-[#00453A] px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-[#E59400] transition-colors w-full max-w-xs flex items-center justify-center"
+              className="bg-[#F59E0B] text-[#0B5E3B] px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-[#e08a00] transition-colors w-full max-w-xs flex items-center justify-center"
             >
               <AiOutlinePhone className="mr-2" /> Call Us
             </motion.a>
@@ -539,7 +495,7 @@ export default function JapanAdventurePackage() {
         </motion.div>
       </motion.section>
 
-      {/* Important Information - Updated with provided details */}
+      {/* Important Information */}
       <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -552,10 +508,10 @@ export default function JapanAdventurePackage() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-bold text-[#00453A] text-center mb-12 font-serif relative"
+          className="text-3xl md:text-4xl font-bold text-[#0B5E3B] text-center mb-8 font-serif relative"
         >
           Important Information
-          <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-16 h-1 bg-[#F5A623]"></span>
+          <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-16 h-1 bg-[#F59E0B]"></span>
         </motion.h2>
         <div className="space-y-4">
           {importantInfo.map((info, index) => (
@@ -565,11 +521,11 @@ export default function JapanAdventurePackage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
               viewport={{ once: true }}
-              className="bg-[#E4DECF] border-l-4 border-[#F5A623] rounded-r-lg shadow-md hover:shadow-lg transition-shadow"
+              className="bg-[#FFF9F0] border-l-4 border-[#F59E0B] rounded-r-lg shadow-md hover:shadow-lg transition-shadow"
             >
               <button
                 onClick={() => toggleInfo(index)}
-                className="w-full flex justify-between items-center p-5 text-left bg-[#E4DECF] text-[#00453A] font-semibold font-sans"
+                className="w-full flex justify-between items-center p-5 text-left bg-[#FFF9F0] text-[#0B5E3B] font-semibold font-sans"
               >
                 <span>{info.title}</span>
                 {openInfo === index ? <AiOutlineUp /> : <AiOutlineDown />}
@@ -594,7 +550,7 @@ export default function JapanAdventurePackage() {
         </div>
       </motion.section>
 
-      {/* FAQs (unchanged structure, updated data) */}
+      {/* FAQs */}
       <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -607,10 +563,10 @@ export default function JapanAdventurePackage() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-bold text-[#00453A] text-center mb-12 font-serif relative"
+          className="text-3xl md:text-4xl font-bold text-[#0B5E3B] text-center mb-8 font-serif relative"
         >
           Frequently Asked Questions
-          <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-16 h-1 bg-[#F5A623]"></span>
+          <span className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-16 h-1 bg-[#F59E0B]"></span>
         </motion.h2>
         <div className="space-y-3">
           {faqs.map((faq, index) => (
@@ -620,22 +576,22 @@ export default function JapanAdventurePackage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
               viewport={{ once: true }}
-              className="bg-[#E4DECF] border border-[#E5E7EB] rounded-lg shadow-sm hover:shadow-md transition-shadow"
+              className="bg-[#FFF9F0] border border-[#E5E7EB] rounded-lg shadow-sm hover:shadow-md transition-shadow"
             >
               <button
                 onClick={() => toggleFaq(index)}
                 className="w-full flex items-center p-4 text-left"
               >
-                <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[#F5A623] text-white rounded-full font-semibold mr-3">
+                <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[#F59E0B] text-white rounded-full font-semibold mr-3">
                   {index + 1}
                 </span>
-                <span className="flex-1 text-[#00453A] font-semibold font-sans text-lg">
+                <span className="flex-1 text-[#0B5E3B] font-semibold font-sans text-lg">
                   {faq.question}
                 </span>
                 {openFaq === index ? (
-                  <AiOutlineUp className="text-[#00453A]" />
+                  <AiOutlineUp className="text-[#0B5E3B]" />
                 ) : (
-                  <AiOutlineDown className="text-[#00453A]" />
+                  <AiOutlineDown className="text-[#0B5E3B]" />
                 )}
               </button>
               <AnimatePresence initial={false}>
@@ -658,7 +614,7 @@ export default function JapanAdventurePackage() {
         </div>
       </motion.section>
 
-      {/* Booking Form Modal - Updated title */}
+      {/* Booking Form Modal */}
       {isModalOpen && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -672,9 +628,9 @@ export default function JapanAdventurePackage() {
             onClick={handleCloseModal}
           ></div>
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
+            initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
+            exit={{ scale: 0.95, opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 p-6"
           >
@@ -687,14 +643,14 @@ export default function JapanAdventurePackage() {
             <div className="mb-4">
               <Image
                 src={heroImage}
-                alt="Japan Adventure"
+                alt="Kerala Honeymoon"
                 width={400}
                 height={128}
                 className="w-full h-32 object-cover rounded-lg"
                 loading="lazy"
                 quality={75}
               />
-              <h3 className="mt-3 text-lg font-bold text-[#00453A] font-sans">10-Day Japan Adventure - Paradise Bliss Tours</h3>
+              <h3 className="mt-3 text-lg font-bold text-[#0B5E3B] font-sans">Lavish Kerala Honeymoon Getaway - ParadiseBliss Tours</h3>
             </div>
             <form onSubmit={handleSubmit}>
               <div className="space-y-4">
@@ -706,7 +662,7 @@ export default function JapanAdventurePackage() {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#00453A] focus:ring-[#00453A]"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0B5E3B] focus:ring-[#0B5E3B]"
                   />
                 </div>
                 <div>
@@ -717,7 +673,7 @@ export default function JapanAdventurePackage() {
                     value={formData.phone}
                     onChange={handleInputChange}
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#00453A] focus:ring-[#00453A]"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0B5E3B] focus:ring-[#0B5E3B]"
                   />
                 </div>
                 <div>
@@ -728,7 +684,7 @@ export default function JapanAdventurePackage() {
                       onChange={handleDateChange}
                       dateFormat="dd/MM/yyyy"
                       minDate={new Date()}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#00453A] focus:ring-[#00453A]"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0B5E3B] focus:ring-[#0B5E3B]"
                       placeholderText="Select date"
                       required
                     />
@@ -744,14 +700,14 @@ export default function JapanAdventurePackage() {
                     onChange={handleInputChange}
                     min="1"
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#00453A] focus:ring-[#00453A]"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0B5E3B] focus:ring-[#0B5E3B]"
                   />
                 </div>
                 <motion.button
                   type="submit"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full py-3 bg-[#F5A623] text-[#00453A] rounded-full font-semibold shadow-lg hover:shadow-xl transition-colors"
+                  className="w-full py-3 bg-[#F59E0B] text-[#0B5E3B] rounded-full font-semibold shadow-lg hover:shadow-xl transition-colors"
                 >
                   Submit Request
                 </motion.button>
@@ -767,7 +723,7 @@ export default function JapanAdventurePackage() {
         .font-serif { font-family: 'Playfair Display', serif; }
         .font-sans { font-family: 'Poppins', sans-serif; }
         .rotate-2 { transform: rotate(2deg); }
-        .rotate--2 { transform: rotate(-2deg); }
+        .-rotate-2 { transform: rotate(-2deg); }
       `}</style>
     </div>
   );

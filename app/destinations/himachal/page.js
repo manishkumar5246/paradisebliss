@@ -9,16 +9,21 @@ import { AiOutlineCalendar } from 'react-icons/ai';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import WhyChooseUs from '@/components/whychooseus';
+import Link from 'next/link';
 
 const tours = [
-  { title: "McLeodganj Himalayan Trekking Odyssey", dates: ["Dates on Request"], prices: ["₹8,999*", "₹7,499*", "₹1,500 Off"], image: "/img/himachal.jpg", duration: "2N3D", group: "Group Tour" },
-  { title: "Kasol Tosh Valley Untamed Journey", dates: ["Dates on Request"], prices: ["₹9,499*", "₹7,999*", "₹1,500 Off"], image: "/img/himachal.jpg", duration: "2N3D", group: "Group Tour" },
-  { title: "Tirthan Valley Cascading Wonders Escape", dates: ["Dates on Request"], prices: ["₹9,999*", "₹8,499*", "₹1,500 Off"], image: "/img/himachal.jpg", duration: "2N3D", group: "Group Tour" },
-  { title: "Manali Kasol Sissu Alpine Dream", dates: ["Dates on Request"], prices: ["₹12,999*", "₹10,999*", "₹2,000 Off"], image: "/img/himachal.jpg", duration: "3N4D", group: "Group Tour" },
-  { title: "McLeod Bir Tirthan Skyward Adventure", dates: ["Dates on Request"], prices: ["₹15,999*", "₹13,999*", "₹2,000 Off"], image: "/img/himachal.jpg", duration: "4N5D", group: "Group Tour" }
+  {
+    title: "himachal tour packages",
+    dates: ["Dates on Request"],
+    prices: ["₹8,999*", "₹7,499*"],
+    image: "/img/himachal.jpg",
+    duration: "2N3D",
+    group: "Group Tour",
+    link: "/indian-tours/himachalpradesh-tour-package",
+  },
 ];
 
-const SpitiValleyTour = () => {
+const HimachalTour = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [contentHeight, setContentHeight] = useState(0);
   const contentRef = useRef(null);
@@ -65,7 +70,7 @@ const SpitiValleyTour = () => {
     setFormData({ name: '', phone: '', date: null, travellers: '', email: '', package: 'Himachal Pradesh Tour' });
   };
 
-  useEffect(() => {
+  useEffect (() => {
     if (contentRef.current) {
       setContentHeight(isOpen ? contentRef.current.scrollHeight : 0);
     }
@@ -103,7 +108,7 @@ const SpitiValleyTour = () => {
             width={100}
             height={100}
             src="/img/logo.png"
-            alt="Paradise Uttarakhand Logo"
+            alt="Paradise Bliss Tours Logo"
             className="w-16 sm:w-20 md:w-24 mb-4 mx-auto"
           />
           <label htmlFor="name" className="block mb-2 text-left text-gray-700 text-sm sm:text-base">
@@ -174,6 +179,7 @@ const SpitiValleyTour = () => {
           />
         </motion.form>
       </div>
+
       {/* About Section */}
       <div className="flex flex-col items-center text-center my-12 px-4 w-full max-w-6xl mx-auto bg-gradient-to-b from-[#F1FDF3] to-white rounded-lg shadow-lg p-8">
         <motion.h2
@@ -185,7 +191,7 @@ const SpitiValleyTour = () => {
           Himachal Pradesh – The Abode of Natural Beauty
         </motion.h2>
         <motion.p
-          className="font-sans text-lg text-gray-700 only mb-6 w-full max-w-5xl leading-relaxed"
+          className="font-sans text-lg text-gray-700 mb-6 w-full max-w-5xl leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -206,45 +212,39 @@ const SpitiValleyTour = () => {
             <div>
               <h3 className="text-2xl font-semibold text-green-900 mb-4">A Journey Through Nature’s Wonderland</h3>
               <p className="text-gray-600 leading-relaxed">
-              Every corner of Himachal offers a new experience. Imagine waking up to the sound of chirping birds, walking through pine-scented trails, and watching the sun set behind snow-laden mountains — that’s everyday magic in Himachal. The state is dotted with charming hill stations like Shimla, Manali, Dharamshala, Dalhousie, and Kasol, each with its unique charm and stories to tell.
-From the colonial elegance of Shimla to the scenic beauty of Kullu-Manali, every destination promises breathtaking views and unforgettable memories. The Spiti Valley, known for its rugged terrain and ancient monasteries, offers a raw, untouched beauty that feels like another world Best Places to Visit in Himachal Pradesh
-  
+                Every corner of Himachal offers a new experience. Imagine waking up to the sound of chirping birds, walking through pine-scented trails, and watching the sun set behind snow-laden mountains — that’s everyday magic in Himachal. The state is dotted with charming hill stations like Shimla, Manali, Dharamshala, Dalhousie, and Kasol, each with its unique charm and stories to tell.
+                From the colonial elegance of Shimla to the scenic beauty of Kullu-Manali, every destination promises breathtaking views and unforgettable memories. The Spiti Valley, known for its rugged terrain and ancient monasteries, offers a raw, untouched beauty that feels like another world.
               </p>
             </div>
             <div>
               <h3 className="text-2xl font-semibold text-green-900 mb-4">Must-Visit Destinations</h3>
               <ul className="list-disc list-inside text-gray-600 space-y-2">
                 <li><strong>Shimla</strong>: The Queen of Hills, known for Mall Road, Ridge, Jakhoo Temple, and toy train rides.</li>
-                <li><strong>Manali</strong>:A favorite among adventure lovers — enjoy paragliding, rafting, skiing, and visit Solang Valley & Rohtang Pass.</li>
+                <li><strong>Manali</strong>: A favorite among adventure lovers — enjoy paragliding, rafting, skiing, and visit Solang Valley & Rohtang Pass.</li>
                 <li><strong>Dharamshala & McLeodganj</strong>: The home of the Dalai Lama, offering spiritual calmness and Tibetan charm.</li>
-                <li><strong>Dalhousie & Khajjiar: </strong>:Often called “Mini Switzerland of India,” these towns are perfect for honeymooners and peace seekers.</li>
-                <li><strong>Kasol & Tosh: </strong>: Paradise for backpackers and trekkers, surrounded by the Parvati Valley’s mesmerizing beauty.</li>
-                <li><strong>Spiti Valley</strong>:The land between Tibet and India, known for its monasteries, cold deserts, and starry skies. </li>
+                <li><strong>Dalhousie & Khajjiar</strong>: Often called “Mini Switzerland of India,” these towns are perfect for honeymooners and peace seekers.</li>
+                <li><strong>Kasol & Tosh</strong>: Paradise for backpackers and trekkers, surrounded by the Parvati Valley’s mesmerizing beauty.</li>
+                <li><strong>Spiti Valley</strong>: The land between Tibet and India, known for its monasteries, cold deserts, and starry skies.</li>
               </ul>
             </div>
             <div>
               <h3 className="text-2xl font-semibold text-green-900 mb-4">Adventures That Awaken Your Soul</h3>
               <p className="text-gray-600 leading-relaxed">
-               Himachal Pradesh is heaven for those who crave adventure. From trekking through snow trails in Manali to river rafting in Kullu, paragliding in Bir Billing, and skiing in Solang
-                Valley, the state offers countless thrilling experiences. Nature lovers can go camping by the Beas River or explore the apple orchards of Kinnaur. Every season in Himachal brings its 
-                own charm — lush green valleys in summer and snow-kissed mountains in winter.
+                Himachal Pradesh is heaven for those who crave adventure. From trekking through snow trails in Manali to river rafting in Kullu, paragliding in Bir Billing, and skiing in Solang Valley, the state offers countless thrilling experiences. Nature lovers can go camping by the Beas River or explore the apple orchards of Kinnaur. Every season in Himachal brings its own charm — lush green valleys in summer and snow-kissed mountains in winter.
               </p>
             </div>
             <div>
-              <h3 className="text-2xl font-semibold text-green-900 mb-4">Culture,Food and Festivals</h3>
+              <h3 className="text-2xl font-semibold text-green-900 mb-4">Culture, Food and Festivals</h3>
               <p className="text-gray-600 leading-relaxed">
                 Beyond its scenic beauty, Himachal is rich in culture and traditions. The locals, with their warm hospitality and colorful attire, make you feel right at home. Festivals like Kullu Dussehra, Halda, and Losar reflect the vibrant spirit of the region. Don’t forget to try the local delicacies like Siddu, Babru, Thukpa, and Trout Fish for a true Himachali experience.
               </p>
             </div>
             <div>
               <h3 className="text-2xl font-semibold text-green-900 mb-4">Best Time to Visit Himachal Pradesh</h3>
-              <p className="text-gray-600 leading-relaxed">
-               
-              </p>
               <ul className="list-disc list-inside text-gray-600 space-y-2">
                 <li><strong>Summer (March to June)</strong>: Perfect for sightseeing, trekking, and exploring hill stations.</li>
-                <li><strong>Monsoon (July to September)</strong>:The valleys bloom with freshness, though landslides are possible in some areas. </li>
-                <li><strong>Winter (October to February)</strong> Best for snow lovers, honeymoon trips, and winter sports.</li>
+                <li><strong>Monsoon (July to September)</strong>: The valleys bloom with freshness, though landslides are possible in some areas.</li>
+                <li><strong>Winter (October to February)</strong>: Best for snow lovers, honeymoon trips, and winter sports.</li>
               </ul>
             </div>
           </div>
@@ -259,6 +259,7 @@ From the colonial elegance of Shimla to the scenic beauty of Kullu-Manali, every
           {isOpen ? 'Show Less' : 'Explore More'}
         </motion.button>
       </div>
+
       {/* Stats Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 p-6 max-w-6xl mx-auto">
         {stats.map((stat, index) => (
@@ -283,6 +284,7 @@ From the colonial elegance of Shimla to the scenic beauty of Kullu-Manali, every
           </motion.div>
         ))}
       </div>
+
       {/* Tour Packages Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1
@@ -292,6 +294,7 @@ From the colonial elegance of Shimla to the scenic beauty of Kullu-Manali, every
           Himachal Tour Packages
         </h1>
       </div>
+
       <div
         style={{ backgroundColor: 'var(--light-green)' }}
         className="relative px-4 sm:px-6 lg:px-10 py-10"
@@ -321,76 +324,93 @@ From the colonial elegance of Shimla to the scenic beauty of Kullu-Manali, every
           >
             {tours.map((tour, index) => (
               <SwiperSlide key={index}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2)',
-                  }}
-                  className="bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-300 h-full"
-                >
-                  <img
-                    height={224}
-                    width={400}
-                    src={tour.image}
-                    alt={tour.title}
-                    className="w-full h-56 object-cover rounded-t-xl"
-                    onError={(e) => {
-                      console.error(`Failed to load image: ${tour.image}`);
-                      e.target.src = '/img/placeholder.jpg';
+                <div className="bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-300 h-full">
+                  {/* Motion wrapper for hover scale */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    whileHover={{
+                      scale: 1.05,
+                      boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2)',
                     }}
-                  />
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900">{tour.title}</h3>
-                    <p className="text-sm text-gray-700 mt-1">
-                      {tour.duration} • {tour.group}
-                    </p>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {tour.dates.map((date, i) => (
-                        <span
-                          key={i}
-                          className="bg-[#F1FDF3] text-[#00453a] px-3 py-1 rounded-full text-sm flex items-center gap-1"
-                        >
-                          <AiOutlineCalendar className="text-[#00453a]" />
-                          {date}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="mt-5 text-right">
-                      <span className="text-gray-500 line-through text-base">
-                        {tour.prices[0]}
-                      </span>
-                      <p className="text-xl font-bold text-green-600 mt-1">
-                        {tour.prices[1]}
-                      </p>
-                    </div>
-                    <motion.button
-                      onClick={() => handleOpenModal(tour)}
-                      whileHover={{ scale: 1.05, backgroundColor: '#00332A' }}
-                      whileTap={{ scale: 0.95 }}
-                      className="w-full mt-5 py-3 bg-[#00453A] text-white rounded-lg flex items-center justify-center gap-2 font-semibold transition-colors duration-300"
-                      aria-label={`Request callback for ${tour.title}`}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
+                    className="h-full flex flex-col"
+                  >
+                    {/* Clickable area: image + info */}
+                    <Link href={tour.link} className="flex-1 flex flex-col cursor-pointer">
+                      <img
+                        height={224}
+                        width={400}
+                        src={tour.image}
+                        alt={tour.title}
+                        className="w-full h-56 object-cover rounded-t-xl"
+                        onError={(e) => {
+                          console.error(`Failed to load image: ${tour.image}`);
+                          e.target.src = '/img/placeholder.jpg';
+                        }}
+                      />
+                      <div className="p-6 flex-1 flex flex-col">
+                        <h3 className="text-xl font-bold text-gray-900">{tour.title}</h3>
+                        <p className="text-sm text-gray-700 mt-1">
+                          {tour.duration} • {tour.group}
+                        </p>
+
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {tour.dates.map((date, i) => (
+                            <span
+                              key={i}
+                              className="bg-[#F1FDF3] text-[#00453a] px-3 py-1 rounded-full text-sm flex items-center gap-1"
+                            >
+                              <AiOutlineCalendar className="text-[#00453a]" />
+                              {date}
+                            </span>
+                          ))}
+                        </div>
+
+                        <div className="mt-5 text-right">
+                          <span className="text-gray-500 line-through text-base">
+                            {tour.prices[0]}
+                          </span>
+                          <p className="text-xl font-bold text-green-600 mt-1">
+                            {tour.prices[1]}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+
+                    {/* Request Callback Button - OUTSIDE the Link */}
+                    <div className="px-6 pb-6">
+                      <motion.button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          handleOpenModal(tour);
+                        }}
+                        whileHover={{ scale: 1.05, backgroundColor: '#00332A' }}
+                        whileTap={{ scale: 0.95 }}
+                        className="w-full py-3 bg-[#00453A] text-white rounded-lg flex items-center justify-center gap-2 font-semibold transition-colors duration-300 cursor-pointer"
+                        aria-label={`Request callback for ${tour.title}`}
                       >
-                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                      </svg>
-                      Request Callback
-                    </motion.button>
-                  </div>
-                </motion.div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                        </svg>
+                        Request Callback
+                      </motion.button>
+                    </div>
+                  </motion.div>
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>
           <div className="swiper-pagination-custom mt-6 text-center"></div>
         </div>
       </div>
+
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -493,7 +513,7 @@ From the colonial elegance of Shimla to the scenic beauty of Kullu-Manali, every
                   type="submit"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full py-3 bg-[#00453A] text-white rounded-lg font-semibold transition-colors duration-300"
+                  className="w-full py-3 bg-[#00453A] text-white rounded-lg font-semibold transition-colors duration-300 cursor-pointer"
                   aria-label="Submit request"
                 >
                   Submit Request
@@ -503,6 +523,7 @@ From the colonial elegance of Shimla to the scenic beauty of Kullu-Manali, every
           </motion.div>
         </div>
       )}
+
       <style jsx>{`
         .swiper-container {
           position: relative;
@@ -535,4 +556,4 @@ From the colonial elegance of Shimla to the scenic beauty of Kullu-Manali, every
   );
 };
 
-export default SpitiValleyTour;
+export default HimachalTour;

@@ -9,15 +9,66 @@ import { AiOutlineCalendar } from 'react-icons/ai';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import WhyChooseUs from '@/components/whychooseus';
+import Link from 'next/link';
 
 const tours = [
-  { title: "Pushkar Holi Festival Extravaganza", dates: ["Dates on Request"], prices: ["₹8,799*"], image: "/img/rajasthan.jpg", duration: "1N2D", group: "Group Tour" },
-  { title: "Udaipur Kumbhalgarh Royal Escape", dates: ["Dates on Request"], prices: ["₹11,199*", "₹10,099*", "₹1,100 Off"], image: "/img/rajasthan.jpg", duration: "2N3D", group: "Group Tour" },
-  { title: "Jaipur Pushkar Heritage Adventure", dates: ["Dates on Request"], prices: ["₹16,299*", "₹14,199*", "₹2,100 Off"], image: "/img/rajasthan.jpg", duration: "3N4D", group: "Group Tour" },
-  { title: "Jaipur Ranthambore Wildlife Safari", dates: ["Dates on Request"], prices: ["₹19,499*", "₹17,399*", "₹2,100 Off"], image: "/img/rajasthan.jpg", duration: "3N4D", group: "Group Tour" }
+  {
+    title: "Pushkar Holi Festival Extravaganza",
+    dates: ["Dates on Request"],
+    prices: ["₹8,799*"],
+    image: "/img/rajasthan.jpg",
+    duration: "1N2D",
+    group: "Group Tour",
+    link: "/indian-tours/pushkarholi-tour-package",
+  },
+  {
+    title: "Udaipur Kumbhalgarh Royal Escape",
+    dates: ["Dates on Request"],
+    prices: ["₹11,199*", "₹10,099*", "₹1,100 Off"],
+    image: "/img/rajasthan.jpg",
+    duration: "2N3D",
+    group: "Group Tour",
+    link: "/indian-tours/udaipur&mount-tour",
+  },
+  {
+    title: "Jaipur Pushkar Heritage Adventure",
+    dates: ["Dates on Request"],
+    prices: ["₹16,299*", "₹14,199*", "₹2,100 Off"],
+    image: "/img/rajasthan.jpg",
+    duration: "3N4D",
+    group: "Group Tour",
+    link: "/indian-tours/jaipur&pushkar-tour-package",
+  },
+  {
+    title: "Jaipur Ranthambore Wildlife Safari",
+    dates: ["Dates on Request"],
+    prices: ["₹19,499*", "₹17,399*", "₹2,100 Off"],
+    image: "/img/rajasthan.jpg",
+    duration: "3N4D",
+    group: "Group Tour",
+    link: "/indian-tours/jaipurranthambore-tour-package",
+  },
+    {
+    title: "Rajathan tour package",
+    dates: ["Dates on Request"],
+    prices: ["₹19,499*", "₹17,399*", "₹2,100 Off"],
+    image: "/img/rajasthan.jpg",
+    duration: "3N4D",
+    group: "Group Tour",
+    link: "/indian-tours/rajasthan-tour-package",
+  },
+    {
+    title: "rajathan tour",
+    dates: ["Dates on Request"],
+    prices: ["₹19,499*", "₹17,399*", "₹2,100 Off"],
+    image: "/img/rajasthan.jpg",
+    duration: "3N4D",
+    group: "Group Tour",
+    link: "/indian-tours/rajasthanU-tour-package",
+  },
 ];
 
-const SpitiValleyTour = () => {
+const RajasthanTour = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [contentHeight, setContentHeight] = useState(0);
   const contentRef = useRef(null);
@@ -40,7 +91,14 @@ const SpitiValleyTour = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedTour(null);
-    setFormData({ name: '', phone: '', date: null, travellers: '', email: '', package: 'Rajasthan Tour' });
+    setFormData((prev) => ({
+      ...prev,
+      name: '',
+      phone: '',
+      date: null,
+      travellers: '',
+      email: '',
+    }));
   };
 
   const handleInputChange = (e) => {
@@ -54,14 +112,22 @@ const SpitiValleyTour = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', { ...formData, tour: selectedTour });
+    console.log('Modal Form Submitted:', { ...formData, tour: selectedTour?.title });
+    alert('Thank you! We will contact you soon.');
     handleCloseModal();
   };
 
   const handleHeroFormSubmit = (e) => {
     e.preventDefault();
-    console.log('Hero form submitted:', formData);
-    setFormData({ name: '', phone: '', date: null, travellers: '', email: '', package: 'Rajasthan Tour' });
+    console.log('Hero Form Submitted:', formData);
+    alert('Thank you! Your inquiry has been sent.');
+    setFormData((prev) => ({
+      ...prev,
+      name: '',
+      phone: '',
+      email: '',
+      package: 'Rajasthan Tour',
+    }));
   };
 
   useEffect(() => {
@@ -89,90 +155,73 @@ const SpitiValleyTour = () => {
         >
           Rajasthan Tour
         </h2>
+
         <motion.form
-          id="travel"
-          autoComplete="on"
           onSubmit={handleHeroFormSubmit}
-          className="hidden lg:block bg-[#E4DECF]/90 bg-opacity-80 p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-xs sm:max-w-sm md:max-w-md z-20 mt-16 lg:mt-20 lg:mr-4 xl:mr-24"
+          className="hidden lg:block bg-[#E4DECF]/90 p-6 rounded-lg shadow-lg w-full max-w-md z-20 mt-16 lg:mt-20 lg:mr-4 xl:mr-24"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <img
-            width={100}
-            height={100}
-            src="/img/logo.png"
-            alt="Paradise Uttarakhand Logo"
-            className="w-16 sm:w-20 md:w-24 mb-4 mx-auto"
-          />
-          <label htmlFor="name" className="block mb-2 text-left text-gray-700 text-sm sm:text-base">
-            Name
-          </label>
+          <img src="/img/logo.png" alt="Paradise Bliss Tours Logo" className="w-20 mx-auto mb-6" />
+
+          <label className="block text-left text-gray-700 text-sm mb-2">Name</label>
           <input
             type="text"
-            id="name"
             name="name"
             value={formData.name}
             onChange={handleInputChange}
-            placeholder="John"
+            placeholder="Your Name"
             required
-            className="w-full p-2 mb-4 border rounded text-sm sm:text-base focus:ring-[#00453A] focus:border-[#00453A]"
-            aria-label="Full name"
+            className="w-full p-3 mb-4 border rounded focus:ring-[#00453A] focus:border-[#00453A]"
           />
-          <label htmlFor="phone" className="block mb-2 text-left text-gray-700 text-sm sm:text-base">
-            Phone
-          </label>
+
+          <label className="block text-left text-gray-700 text-sm mb-2">Phone</label>
           <input
             type="tel"
-            id="phone"
             name="phone"
             value={formData.phone}
             onChange={handleInputChange}
-            placeholder="Phone"
+            placeholder="+91 98765 43210"
             required
-            className="w-full p-2 mb-4 border rounded text-sm sm:text-base focus:ring-[#00453A] focus:border-[#00453A]"
-            aria-label="Phone number"
+            className="w-full p-3 mb-4 border rounded focus:ring-[#00453A] focus:border-[#00453A]"
           />
-          <label htmlFor="package" className="block mb-2 text-left text-gray-700 text-sm sm:text-base">
-            Package
-          </label>
+
+          <label className="block text-left text-gray-700 text-sm mb-2">Package</label>
           <select
-            id="package"
             name="package"
             value={formData.package}
             onChange={handleInputChange}
             required
-            className="w-full p-2 mb-4 border rounded text-sm sm:text-base focus:ring-[#00453A] focus:border-[#00453A]"
-            aria-label="Tour package selection"
+            className="w-full p-3 mb-4 border rounded focus:ring-[#00453A] focus:border-[#00453A]"
           >
-            <option value="Rajasthan Tour">Rajasthan Tour</option>
-            <option value="Ladakh">Ladakh</option>
-            <option value="Sikkim">Sikkim</option>
+            <option value="Rajasthan Tour">Rajasthan – Land of Kings</option>
+            <option value="Ladakh Tour">Ladakh</option>
+            <option value="Kerala Tour">Kerala</option>
           </select>
-          <label htmlFor="email" className="block mb-2 text-left text-gray-700 text-sm sm:text-base">
-            Email
-          </label>
+
+          <label className="block text-left text-gray-700 text-sm mb-2">Email</label>
           <input
             type="email"
-            id="email"
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            placeholder="example@mail.com"
+            placeholder="you@example.com"
             required
-            className="w-full p-2 mb-4 border rounded text-sm sm:text-base focus:ring-[#00453A] focus:border-[#00453A]"
-            aria-label="Email address"
+            className="w-full p-3 mb-4 border rounded focus:ring-[#00453A] focus:border-[#00453A]"
           />
-          <motion.input
+
+          <motion.button
             type="submit"
-            value="Submit"
-            className="w-full bg-[#00453a] text-white p-2 rounded hover:bg-green-600 transition font-bold text-sm sm:text-base cursor-pointer"
+            className="w-full bg-[#00453A] text-white py-3 rounded font-bold hover:bg-[#00332A] transition"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            aria-label="Submit form"
-          />
+          >
+            Submit Inquiry
+          </motion.button>
         </motion.form>
       </div>
+
       {/* About Section */}
       <div className="flex flex-col items-center text-center my-12 px-4 w-full max-w-6xl mx-auto bg-gradient-to-b from-[#F1FDF3] to-white rounded-lg shadow-lg p-8">
         <motion.h2
@@ -184,106 +233,94 @@ const SpitiValleyTour = () => {
           Rajasthan – The Land of Royalty and Heritage
         </motion.h2>
         <motion.p
-          className="font-sans text-lg text-gray-700 only mb-6 w-full max-w-5xl leading-relaxed"
+          className="font-sans text-lg text-gray-700 mb-6 w-full max-w-5xl leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Welcome to Rajasthan, a land where every fort tells a story, every palace whispers history, and every desert dune echoes the songs of valor and romance. Known as the Land of Kings, Rajasthan is India’s most vibrant and culturally rich state — a perfect blend of royal grandeur, colorful traditions, and timeless beauty. From the golden sands of the Thar Desert to majestic palaces and bustling markets, Rajasthan promises an experience like no other.
+          Welcome to Rajasthan, a land where every fort tells a story, every palace whispers history, and every desert dune echoes the songs of valor and romance. Known as the Land of Kings, Rajasthan is India’s most vibrant and culturally rich state — a perfect blend of royal grandeur, colorful traditions, and timeless beauty.
         </motion.p>
+
         <div
           ref={contentRef}
           className={`text-left w-full max-w-5xl overflow-hidden transition-all duration-700 ease-in-out transform ${
             isOpen ? 'opacity-100 scale-y-100 mb-6' : 'opacity-0 scale-y-0'
           }`}
-          style={{
-            height: isOpen ? `${contentHeight}px` : '0px',
-            transformOrigin: 'top',
-          }}
+          style={{ height: isOpen ? `${contentHeight}px` : '0px', transformOrigin: 'top' }}
         >
-          <div className="py-6 space-y-8">
+          <div className="py-6 space-y-8 text-gray-600">
             <div>
               <h3 className="text-2xl font-semibold text-green-900 mb-4">A Royal Journey Through Time</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Rajasthan is a living museum of India’s glorious past. The state’s architectural marvels — from Jaipur’s Amber Fort and City Palace to Udaipur’s Lake Palace and Jodhpur’s Mehrangarh Fort — stand as proud symbols of royal elegance and craftsmanship. Each city has its own charm and legacy, offering travelers a glimpse into a world of kings, queens, and timeless tales.
+              <p className="leading-relaxed">
+                Rajasthan is a living museum of India’s glorious past. The state’s architectural marvels — from Jaipur’s Amber Fort and City Palace to Udaipur’s Lake Palace and Jodhpur’s Mehrangarh Fort — stand as proud symbols of royal elegance and craftsmanship.
               </p>
             </div>
             <div>
               <h3 className="text-2xl font-semibold text-green-900 mb-4">Must-Visit Destinations</h3>
-              <ul className="list-disc list-inside text-gray-600 space-y-2">
-                <li><strong>Jaipur – The Pink City</strong>: Famous for its royal palaces, colorful bazaars, and architectural wonders like Hawa Mahal and Jantar Mantar.</li>
-                <li><strong>Udaipur – The City of Lakes</strong>: Known for its romantic lakes, palaces, and luxurious boat rides on Lake Pichola.</li>
-                <li><strong>Jodhpur – The Blue City</strong>: Dominated by the magnificent Mehrangarh Fort and blue-painted houses that create a mesmerizing skyline.</li>
-                <li><strong>Jaisalmer – The Golden City</strong>: A desert gem with the stunning Jaisalmer Fort, sand dunes, and camel safaris under starry skies.</li>
-                <li><strong>Pushkar & Ajmer</strong>: Known for their spiritual vibes, sacred lakes, and ancient temples.</li>
-                <li><strong>Mount Abu</strong>: The only hill station in Rajasthan, offering cool breezes, scenic views, and the stunning Dilwara Temples.</li>
+              <ul className="list-disc list-inside space-y-2">
+                <li><strong>Jaipur</strong>: The Pink City – Hawa Mahal, Amber Fort, City Palace</li>
+                <li><strong>Udaipur</strong>: City of Lakes – Lake Pichola, Jag Mandir, City Palace</li>
+                <li><strong>Jodhpur</strong>: The Blue City – Mehrangarh Fort, Umaid Bhawan</li>
+                <li><strong>Jaisalmer</strong>: Golden City – Sonar Quila, Sam Sand Dunes</li>
+                <li><strong>Pushkar</strong>: Sacred lake, Brahma Temple & Camel Fair</li>
+                <li><strong>Mount Abu</strong>: Rajasthan’s only hill station</li>
               </ul>
             </div>
             <div>
               <h3 className="text-2xl font-semibold text-green-900 mb-4">The Magic of the Desert</h3>
-              <p className="text-gray-600 leading-relaxed">
-                The Thar Desert adds a unique charm to Rajasthan’s beauty. The golden sands stretch endlessly, offering thrilling experiences like camel safaris, dune bashing, camping, and folk performances. As the sun sets, the desert glows with golden hues while local artists fill the night with music, dance, and laughter. Spending a night in a desert camp near Jaisalmer or Sam Dunes is truly unforgettable.
+              <p className="leading-relaxed">
+                Experience camel safaris, desert camping, folk music & dance under the stars in the golden Thar Desert — an unforgettable Rajasthani tradition.
               </p>
             </div>
             <div>
               <h3 className="text-2xl font-semibold text-green-900 mb-4">Culture, Colors, and Festivals</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Rajasthan is synonymous with color and celebration. The state’s rich culture comes alive through its festivals, folk dances, and handicrafts. From the Pushkar Camel Fair to the Desert Festival of Jaisalmer, every event is a grand spectacle of joy and tradition. The warmth of the Rajasthani people, their hospitality, and their traditional attire make every visitor feel like royalty. The vibrant markets filled with mirror-work textiles, silver jewelry, blue pottery, and leather goods are a shopper’s paradise.
+              <p className="leading-relaxed">
+                From Pushkar Camel Fair to Desert Festival, Holi in Barsana, and vibrant folk dances — Rajasthan comes alive with color, music, and celebration.
               </p>
             </div>
             <div>
               <h3 className="text-2xl font-semibold text-green-900 mb-4">A Culinary Royal Treat</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Rajasthan’s cuisine is as royal as its history. The state offers a delightful range of flavors — from spicy Laal Maas (red meat curry) and Ker Sangri to traditional sweets like Ghewar, Malpua, and Mawa Kachori. Don’t miss the famous Dal Baati Churma, a signature dish that perfectly captures the essence of Rajasthani taste and tradition.
+              <p className="leading-relaxed">
+                Savor Dal Baati Churma, Laal Maas, Gatte ki Sabzi, Ker Sangri, and sweets like Ghewar & Malpua — pure royal indulgence.
               </p>
             </div>
             <div>
               <h3 className="text-2xl font-semibold text-green-900 mb-4">Best Time to Visit Rajasthan</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Rajasthan’s charm can be enjoyed throughout the year, but the best time to visit is during the cooler months:
-              </p>
-              <ul className="list-disc list-inside text-gray-600 space-y-2">
-                <li><strong>October to March</strong>: Perfect for sightseeing, desert activities, and festivals.</li>
-                <li><strong>April to June</strong>: Ideal for exploring hill regions like Mount Abu.</li>
-                <li><strong>July to September</strong>: The monsoon season adds a refreshing touch to the royal landscapes.</li>
+              <ul className="list-disc list-inside space-y-2">
+                <li><strong>Oct–Mar:</strong> Peak season – pleasant weather, festivals</li>
+                <li><strong>Apr–Jun:</strong> Good for Mount Abu & off-season deals</li>
+                <li><strong>Jul–Sep:</strong> Monsoon beauty in palaces & lakes</li>
               </ul>
             </div>
           </div>
         </div>
+
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
-          className="mt-6 px-8 py-3 cursor-pointer bg-green-900 text-white rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out font-semibold"
+          className="mt-6 px-8 py-3 bg-green-900 text-white rounded-lg hover:bg-green-700 transition font-semibold"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          aria-label={isOpen ? 'Show less content' : 'Show more content'}
         >
           {isOpen ? 'Show Less' : 'Explore More'}
         </motion.button>
       </div>
+
       {/* Stats Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 p-6 max-w-6xl mx-auto">
         {stats.map((stat, index) => (
           <motion.div
             key={index}
-            className="text-center text-green-900 flex-1 max-w-xs mx-auto"
+            className="text-center text-green-900"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <img
-              width={48}
-              height={48}
-              src={stat.img}
-              alt={stat.text.split('<br/>')[0]}
-              className="w-12 h-12 mx-auto"
-            />
-            <p
-              className="mt-2 text-lg font-bold"
-              dangerouslySetInnerHTML={{ __html: stat.text }}
-            />
+            <img src={stat.img} alt="" className="w-12 h-12 mx-auto" />
+            <p className="mt-2 text-lg font-bold" dangerouslySetInnerHTML={{ __html: stat.text }} />
           </motion.div>
         ))}
       </div>
+
       {/* Tour Packages Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1
@@ -293,27 +330,15 @@ const SpitiValleyTour = () => {
           Rajasthan Tour Packages
         </h1>
       </div>
-      <div
-        style={{ backgroundColor: 'var(--light-green)' }}
-        className="relative px-4 sm:px-6 lg:px-10 py-10"
-      >
+
+      <div style={{ backgroundColor: 'var(--light-green)' }} className="relative px-4 sm:px-6 lg:px-10 py-10">
         <div className="swiper-container">
           <Swiper
             modules={[Pagination, Autoplay, Navigation]}
             spaceBetween={20}
             slidesPerView={1}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
-            pagination={{
-              clickable: true,
-              el: '.swiper-pagination-custom',
-              dynamicBullets: true,
-              renderBullet: (index, className) => {
-                return `<span class="${className}"></span>`;
-              },
-            }}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            pagination={{ clickable: true, el: '.swiper-pagination-custom', dynamicBullets: true }}
             breakpoints={{
               768: { slidesPerView: 2 },
               1024: { slidesPerView: 3.5 },
@@ -322,84 +347,71 @@ const SpitiValleyTour = () => {
           >
             {tours.map((tour, index) => (
               <SwiperSlide key={index}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2)',
-                  }}
-                  className="bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-300 h-full"
-                >
-                  <img
-                    height={224}
-                    width={400}
-                    src={tour.image}
-                    alt={tour.title}
-                    className="w-full h-56 object-cover rounded-t-xl"
-                    onError={(e) => {
-                      console.error(`Failed to load image: ${tour.image}`);
-                      e.target.src = '/img/placeholder.jpg';
-                    }}
-                  />
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900">{tour.title}</h3>
-                    <p className="text-sm text-gray-700 mt-1">
-                      {tour.duration} • {tour.group}
-                    </p>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {tour.dates.map((date, i) => (
-                        <span
-                          key={i}
-                          className="bg-[#F1FDF3] text-[#00453a] px-3 py-1 rounded-full text-sm flex items-center gap-1"
-                        >
-                          <AiOutlineCalendar className="text-[#00453a]" />
-                          {date}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="mt-5 text-right">
-                      <span className="text-gray-500 line-through text-base">
-                        {tour.prices[0]}
-                      </span>
-                      <p className="text-xl font-bold text-green-600 mt-1">
-                        {tour.prices[1] || tour.prices[0]}
-                      </p>
-                    </div>
-                    <motion.button
-                      onClick={() => handleOpenModal(tour)}
-                      whileHover={{ scale: 1.05, backgroundColor: '#00332A' }}
-                      whileTap={{ scale: 0.95 }}
-                      className="w-full mt-5 py-3 bg-[#00453A] text-white rounded-lg flex items-center justify-center gap-2 font-semibold transition-colors duration-300"
-                      aria-label={`Request callback for ${tour.title}`}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
+                <div className="bg-white rounded-xl shadow-2xl overflow-hidden h-full flex flex-col">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    whileHover={{ scale: 1.05, boxShadow: '0 15px 30px rgba(0,0,0,0.2)' }}
+                    className="h-full flex flex-col"
+                  >
+                    <Link href={tour.link} className="flex-1 flex flex-col">
+                      <img
+                        src={tour.image}
+                        alt={tour.title}
+                        className="w-full h-56 object-cover rounded-t-xl"
+                        onError={(e) => (e.target.src = '/img/placeholder.jpg')}
+                      />
+                      <div className="p-6 flex-1">
+                        <h3 className="text-xl font-bold text-gray-900">{tour.title}</h3>
+                        <p className="text-sm text-gray-700 mt-1">{tour.duration} • {tour.group}</p>
+
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {tour.dates.map((date, i) => (
+                            <span key={i} className="bg-[#F1FDF3] text-[#00453a] px-3 py-1 rounded-full text-sm flex items-center gap-1">
+                              <AiOutlineCalendar /> {date}
+                            </span>
+                          ))}
+                        </div>
+
+                        <div className="mt-5 text-right">
+                          {tour.prices[0] && <span className="text-gray-500 line-through text-base">{tour.prices[0]}</span>}
+                          <p className="text-xl font-bold text-green-600 mt-1">{tour.prices[1] || tour.prices[0]}</p>
+                          {tour.prices[2] && <p className="text-sm text-red-600 font-medium">{tour.prices[2]}</p>}
+                        </div>
+                      </div>
+                    </Link>
+
+                    <div className="px-6 pb-6">
+                      <motion.button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleOpenModal(tour);
+                        }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="w-full py-3 bg-[#00453A] text-white rounded-lg font-semibold flex items-center justify-center gap-2 hover:bg-[#00332A] transition"
                       >
-                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                      </svg>
-                      Request Callback
-                    </motion.button>
-                  </div>
-                </motion.div>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                        </svg>
+                        Request Callback
+                      </motion.button>
+                    </div>
+                  </motion.div>
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>
           <div className="swiper-pagination-custom mt-6 text-center"></div>
         </div>
       </div>
+
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
-            onClick={handleCloseModal}
-            aria-hidden="true"
-          ></div>
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={handleCloseModal} aria-hidden="true"></div>
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -408,132 +420,97 @@ const SpitiValleyTour = () => {
           >
             <button
               onClick={handleCloseModal}
-              className="absolute top-1 right-3 text-gray-500 hover:text-gray-700"
+              className="absolute top-3 right-4 text-2xl text-gray-600 hover:text-gray-900"
               aria-label="Close modal"
             >
-              ✕
+              ×
             </button>
+
             {selectedTour && (
-              <div className="mb-4">
+              <div className="mb-6 text-center">
                 <img
-                  height={128}
-                  width={400}
                   src={selectedTour.image}
                   alt={selectedTour.title}
-                  className="w-full h-32 object-cover rounded-lg"
+                  className="w-full h-32 object-cover rounded-lg mb-4"
+                  onError={(e) => (e.target.src = '/img/placeholder.jpg')}
                 />
-                <h3 className="mt-3 text-lg font-bold text-gray-900">
-                  {selectedTour.title}
-                </h3>
+                <h3 className="text-xl font-bold text-gray-900">{selectedTour.title}</h3>
               </div>
             )}
-            <form onSubmit={handleSubmit}>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#00453A] focus:ring-[#00453A]"
-                    aria-label="Full name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#00453A] focus:ring-[#00453A]"
-                    aria-label="Phone number"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Preferred Date
-                  </label>
-                  <div className="relative">
-                    <DatePicker
-                      selected={formData.date}
-                      onChange={handleDateChange}
-                      dateFormat="dd/MM/yyyy"
-                      minDate={new Date()}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#00453A] focus:ring-[#00453A]"
-                      placeholderText="Select date"
-                      required
-                      aria-label="Preferred travel date"
-                    />
-                    <AiOutlineCalendar className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Number of Travellers
-                  </label>
-                  <input
-                    type="number"
-                    name="travellers"
-                    value={formData.travellers}
-                    onChange={handleInputChange}
-                    min="1"
-                    required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#00453A] focus:ring-[#00453A]"
-                    aria-label="Number of travellers"
-                  />
-                </div>
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full py-3 bg-[#00453A] text-white rounded-lg font-semibold transition-colors duration-300"
-                  aria-label="Submit request"
-                >
-                  Submit Request
-                </motion.button>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                placeholder="Your Name"
+                required
+                className="w-full p-3 border rounded-lg focus:ring-[#00453A]"
+              />
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                placeholder="Phone Number"
+                required
+                className="w-full p-3 border rounded-lg focus:ring-[#00453A]"
+              />
+              <div className="relative">
+                <DatePicker
+                  selected={formData.date}
+                  onChange={handleDateChange}
+                  minDate={new Date()}
+                  dateFormat="dd/MM/yyyy"
+                  placeholderText="Preferred Travel Date"
+                  required
+                  className="w-full p-3 border rounded-lg focus:ring-[#00453A]"
+                />
+                <AiOutlineCalendar className="absolute right-3 top-4 text-gray-500 pointer-events-none" />
               </div>
+              <input
+                type="number"
+                name="travellers"
+                value={formData.travellers}
+                onChange={handleInputChange}
+                placeholder="Number of Travellers"
+                min="1"
+                required
+                className="w-full p-3 border rounded-lg focus:ring-[#00453A]"
+              />
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full bg-[#00453A] text-white py-3 rounded-lg font-bold hover:bg-[#00332A] transition"
+              >
+                Submit Request
+              </motion.button>
             </form>
           </motion.div>
         </div>
       )}
+
       <style jsx>{`
-        .swiper-container {
-          position: relative;
-        }
-        .swiper-pagination-custom {
-          position: relative;
-          bottom: 0;
-          padding-bottom: 10px;
-        }
         .swiper-pagination-bullet {
           background: rgba(255, 255, 255, 0.8);
           width: 12px;
           height: 12px;
-          margin: 0 8px;
-          border-radius: 50%;
-          transition: all 0.3s ease;
         }
         .swiper-pagination-bullet-active {
-          background: var(--color-dark);
+          background: #00453A;
           width: 14px;
           height: 14px;
-          opacity: 1;
         }
         .react-datepicker-wrapper {
           width: 100%;
         }
       `}</style>
+
       <WhyChooseUs />
     </>
   );
 };
 
-export default SpitiValleyTour;
+export default RajasthanTour;
