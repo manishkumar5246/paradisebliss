@@ -17,12 +17,12 @@ import Image from 'next/image';
 /* --------------------------- DATA -------------------------------- */
 /* ------------------------------------------------------------------ */
 
-const heroImage = '/img/spiti/winter-hero.jpg';
+const heroImage = 'https://www.onacheaptrip.com/wp-content/uploads/Key-Monsatery-Spiti-valley-768x512.jpeg';
 const highlightImages = [
-  '/img/spiti/langza-winter.jpg',
-  '/img/spiti/hikkim-winter.jpg',
-  '/img/spiti/kaza-winter.jpg',
-  '/img/spiti/dhankar-winter.jpg',
+  'https://instahimachal.com/wp-content/uploads/2022/09/Spiti-Winter-Trip-Himachal-Pradesh-Insta-Himachal.jpeg',
+  'https://static.wixstatic.com/media/3eb94e_0105354fad944a61ab0277259a645da4~mv2.jpg/v1/fill/w_815,h_446,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/3eb94e_0105354fad944a61ab0277259a645da4~mv2.jpg',
+  'https://assets.traveltriangle.com/blog/wp-content/uploads/2017/10/acj-0510-spiti-in-winter-9.jpg',
+  'https://res.cloudinary.com/dwzmsvp7f/image/fetch/q_75,f_auto,w_1316/https://media.insider.in/image/upload/c_crop%2Cg_custom/v1569331294/xmh76gaqgfckewmbh1lb.jpg',
 ];
 const rightSideImage = '/img/spiti/winter-starry-sky.jpg';
 

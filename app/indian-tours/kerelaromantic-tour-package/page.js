@@ -7,12 +7,12 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Image from 'next/image';
 
 // Images (replace with your actual optimized asset paths)
-const heroImage = "/optimised/kerala-honeymoon-hero.jpg";
+const heroImage = "https://tse4.mm.bing.net/th/id/OIP.vg45XWSIAcRc1gIYTVQChAHaE8?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3";
 const highlightImages = [
-  "/optimised/kerala-munnar.jpg",
-  "/optimised/kerala-munnar-lake.jpg",
-  "/optimised/kerala-houseboat-romantic.jpg",
-  "/optimised/kerala-kochi-sunset.jpg",
+  "https://tse1.mm.bing.net/th/id/OIP.wiEEqP7og5YBtPLLa_e8XgHaET?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+  "https://i.pinimg.com/originals/04/85/f8/0485f82c3680fe9c03f7f9ec31505454.jpg",
+  "https://www.tyndistravel.com/uploads/editor/mceu_5522354311659782136703-1659782136.jpg",
+  "https://tse1.mm.bing.net/th/id/OIP.qsfliLkoUwRXSFrKRfiZIwHaE8?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
 ];
 const rightSideImage = "/img/kerala-logo.png";
 

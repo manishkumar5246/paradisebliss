@@ -8,12 +8,12 @@ import Image from 'next/image';
 import { memo } from 'react';
 
 // Updated images for Leh to Turtuk Tour (replace with actual image paths)
-const heroImage = "/optimised/turtuk-village.jpg";
+const heroImage = "https://www.ladakh-tourism.net/wp-content/uploads/2021/08/Turtuk-bridge-1.jpeg";
 const highlightImages = [
-  "/optimised/khardung-la-pass.webp",
-  "/optimised/hunder-dunes.jpeg",
-  "/optimised/turtuk-balti.jpg",
-  "/optimised/pangong-lake.png",
+  "https://img.freepik.com/premium-photo/khardung-la-pass-india-khardung-la-is-high-mountain-pass_29285-2285.jpg?w=2000",
+  "https://img.freepik.com/premium-photo/sand-dunes-himalayas-hunder-nubra-valley-ladakh-india_163782-11933.jpg",
+  "https://as1.ftcdn.net/v2/jpg/05/45/85/38/1000_F_545853865_FDla8VPscbZlmm10jNob4DaWl3bUHwK3.jpg",
+  "https://tse2.mm.bing.net/th/id/OIP.g4tsP4wxEKmVKp7s2PSQRgHaEK?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
 ];
 const rightSideImage = "/img/logo.png";
 

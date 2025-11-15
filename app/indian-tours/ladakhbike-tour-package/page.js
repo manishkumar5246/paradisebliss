@@ -8,12 +8,12 @@ import Image from 'next/image';
 import { memo } from 'react';
 
 // Images
-const heroImage = "/optimised/ladakh-bike-hero.webp";
+const heroImage = "/optimised/ladakhtour2.jpg";
 const highlightImages = [
-  "/optimised/khardung-la-bike.webp",
-  "/optimised/nubra-bike-dunes.webp",
-  "/optimised/pangong-bike-lake.webp",
-  "/optimised/royal-enfield-ladakh.webp",
+  "https://acmekashmirtravels.com/images/khar.jpg",
+  "https://xplro.com/wp-content/uploads/2024/02/Nubra-Valley-bike-trip.jpg",
+  "https://images5.alphacoders.com/641/641406.jpg",
+  "https://www.webbikeworld.com/wp-content/uploads/2023/03/wallpaperflare.com_wallpaper-7-8-scaled.jpg",
 ];
 const rightSideImage = "/img/logo.png";
 

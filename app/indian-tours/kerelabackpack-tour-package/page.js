@@ -8,12 +8,12 @@ import Image from 'next/image';
 import { memo } from 'react';
 
 // Kerala Images (Replace these with your actual image paths)
-const heroImage = "/optimised/kerala-hero.webp";
+const heroImage = "https://wallpapercave.com/wp/wp2894143.jpg";
 const highlightImages = [
-  "/optimised/munnar-tea.webp",
-  "/optimised/alleppey-houseboat.webp",
-  "/optimised/kovalam-beach.webp",
-  "/optimised/cheeyappara-waterfall.webp",
+  "https://tse1.mm.bing.net/th/id/OIP.kbGsjvf_D3R6ib4xrERfywHaFj?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+  "https://tse2.mm.bing.net/th/id/OIP.e23tMbdJTF5ML7Fudx6wbgHaE8?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+  "https://tse1.mm.bing.net/th/id/OIP.3PJTDtzDuNukXzYmRboaQQHaE8?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+  "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/39/7f/0f/cheeyappara-waterfalls.jpg?w=1800&h=1000&s=1",
 ];
 const rightSideImage = "/img/logo.png"; // Your logo
 

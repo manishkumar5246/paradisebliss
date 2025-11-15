@@ -8,14 +8,14 @@ import Image from 'next/image';
 import { memo } from 'react';
 
 // === Images (Update with your actual paths) ===
-const heroImage = "/img/himachal/hero-snow-peaks.jpg";
+const heroImage = "/optimised/Himachaltour4.jpg";
 const highlightImages = [
-  "/img/himachal/shimla.jpg",
-  "/img/himachal/manali.jpg",
-  "/img/himachal/dharamshala.jpg",
-  "/img/himachal/dalhousie.jpg",
-  "/img/himachal/kasol.jpg",
-  "/img/himachal/spiti.jpg",
+  "https://cdn.pixabay.com/photo/2016/12/30/23/07/manali-1941787_1280.jpg",
+  "https://as1.ftcdn.net/v2/jpg/04/09/57/16/1000_F_409571615_KEsl0FOjDX23T805YsCUVqJyhjy6iRJt.jpg",
+  "https://travelsetu.com/apps/uploads/new_destinations_photos/destination/2023/12/13/826a0c0d60e9b5672b844c159c2370a8_1000x1000.jpg",
+  "https://wallpaperaccess.com/full/7950659.jpg",
+  "https://www.adventurush.com/wp-content/uploads/2022/08/Copy-of-uuqw2eznipmqo1bjevu4ay8nmt9g_1586379567_shutterstock_1575759727_-_Copy.jpg",
+  "https://wallpaperaccess.com/full/3511577.jpg",
 ];
 const rightSideImage = "/img/himachal/siddu-thukpa.jpg";
 

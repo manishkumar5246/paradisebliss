@@ -8,12 +8,12 @@ import Image from 'next/image';
 import { memo } from 'react';
 
 // === IMAGES (Update with your actual Kasol-Tosh images) ===
-const heroImage = "/optimised/kasol-tosh-hero.webp"; // Parvati Valley or Tosh village in snow
+const heroImage = "https://www.adventurush.com/wp-content/uploads/2022/08/Copy-of-IMG_1250.jpg"; // Parvati Valley or Tosh village in snow
 const highlightImages = [
-  "/optimised/kasol-market.webp",         // Kasol Market & Cafés
-  "/optimised/chalal-trek.webp",          // Chalal Village Trek
-  "/optimised/tosh-village.webp",         // Tosh Village
-  "/optimised/tosh-waterfall.webp",       // Tosh Waterfall
+  "https://images.picxy.com/cache/2020/10/19/5e9cfe337abde5871f4f6c7f04778baa.jpg",         // Kasol Market & Cafés
+  "https://himachalstay.in/wp-content/uploads/2024/10/Trekking-in-Tosh.jpg",          // Chalal Village Trek
+  "https://thumbs.dreamstime.com/b/door-tosh-hovli-palace-khiva-uzbekistan-high-quality-photo-door-tosh-hovli-palace-khiva-uzbekistan-282230183.jpg",         // Tosh Village
+  "https://toshregency.com/images/attraction/at10.webp",       // Tosh Waterfall
 ];
 const rightSideImage = "/img/logo.png";
 

@@ -17,12 +17,12 @@ import Image from 'next/image';
 /* ---------------------------  DATA  -------------------------------- */
 /* ------------------------------------------------------------------ */
 
-const heroImage = '/img/spiti/bike-hero.jpg';
+const heroImage = 'https://himalayanrider.com/wp-content/uploads/2024/09/Spiti-Valley-Bike-Trip-From-Tamil-Nadu-2.jpeg';
 const highlightImages = [
-  '/img/spiti/chitkul-bike.jpg',
-  '/img/spiti/key-monastery-bike.jpg',
-  '/img/spiti/chandratal-camp-bike.jpg',
-  '/img/spiti/jalori-pass-bike.jpg',
+  'https://s3-ap-south-1.amazonaws.com/soulveda-media-prod/wp-content/uploads/2024/07/26102049/Captivating-scenery-mythical-charm-and-rich-heritage-Why-Indias-last-village-deserves-a-spot-on-your-travel-bucket-list.jpg',
+  'https://raacho.b-cdn.net/wp-content/uploads/2022/06/Chitkul-village-on-a-sunny-day-of-May-month.jpg',
+  'https://tse3.mm.bing.net/th/id/OIP.aukJDS84NObE9emA2m0poQHaFj?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3',
+  'https://th.bing.com/th/id/R.474630e54bb9a522177267d5818dcddf?rik=6obTc6UFRxdGBw&riu=http%3a%2f%2fwww.deodarcottage.com%2fwp-content%2fuploads%2f2015%2f12%2f115.jpg&ehk=k%2fOXVZ8HaFj1j%2f2Nc0CeXV%2fQtIYTGz6s9hrgxeQQ%2f1Q%3d&risl=&pid=ImgRaw&r=0',
 ];
 const rightSideImage = '/img/spiti/bike-sunset-chandratal.jpg';
 

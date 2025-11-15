@@ -8,12 +8,12 @@ import Image from 'next/image';
 import { memo } from 'react';
 
 // Update these with your actual Kerala images
-const heroImage = "/optimised/kerala-backwaters-hero.webp";     // Houseboat or Alleppey sunset
+const heroImage = "https://tse3.mm.bing.net/th/id/OIP.rkZG0JT6ASsrapR18RrjGwHaEK?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3";     // Houseboat or Alleppey sunset
 const highlightImages = [
-  "/optimised/alleppey-houseboat.webp",     // Backwaters
-  "/optimised/munnar-tea-garden.webp",      // Munnar
-  "/optimised/kovalam-beach.webp",          // Kovalam/Varkala
-  "/optimised/kathakali-dance.webp",        // Culture
+  "https://www.tyndistravel.com/uploads/editor/mceu_5522354311659782136703-1659782136.jpg",     // Backwaters
+  "https://tse3.mm.bing.net/th/id/OIP.SEV7ED07l-h2FVFYnp4C-gHaFI?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",      // Munnar
+  "https://www.visittnt.com/blog/wp-content/uploads/2017/09/image_14908459336960.jpg",          // Kovalam/Varkala
+  "https://tse4.mm.bing.net/th/id/OIP.6UrYoqvLLuL9Etc3ebTk7QHaE8?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",        // Culture
 ];
 const rightSideImage = "/img/logo.png";
 

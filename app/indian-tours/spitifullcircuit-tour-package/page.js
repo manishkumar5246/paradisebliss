@@ -7,12 +7,12 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Image from 'next/image';
 
 // Spiti Full Circuit Images (replace with actual paths)
-const heroImage = "/img/spiti-full-circuit-hero.jpg";
+const heroImage = "https://tse2.mm.bing.net/th/id/OIP.fQufUcYMNI0KVSRsJv86uAHaFj?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3";
 const highlightImages = [
-  "/img/spiti/key-monastery.jpg",
-  "/img/spiti/chicham-bridge.jpg",
-  "/img/spiti/chandratal-lake.jpg",
-  "/img/spiti/dhankar.jpg",
+  "https://zoyotrip.in/wp-content/uploads/2025/06/mountains-8178790_1280-1024x1024.jpg",
+  "https://cdn.pixabay.com/photo/2017/09/27/13/50/chandra-tal-2792123_640.jpg",
+  "https://moxtain.s3.ap-south-1.amazonaws.com/blogs/ChandratalLake/chandratal-lake.jpg",
+  "https://www.treksandtrails.org/system/images/000/585/080/d22cf3546d24c2cfaf48b86420f990f5/x600gt/Kibber-Spiti-Valley-4.jpg?1741338696",
 ];
 const rightSideImage = "/img/spiti/chandratal-starry.jpg";
 

@@ -7,12 +7,12 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Image from 'next/image';
 
 // Spiti Summer Tour Images (replace with actual paths)
-const heroImage = "/img/spiti-summer-hero.jpg";
+const heroImage = "/optimised/spiti-Chandrataal4.jpg";
 const highlightImages = [
-  "/img/spiti/key-monastery.jpg",
-  "/img/spiti/chandratal-lake.jpg",
-  "/img/spiti/hikkim-post-office.jpg",
-  "/img/spiti/kaza-village.jpg",
+  "https://th.bing.com/th/id/R.474630e54bb9a522177267d5818dcddf?rik=6obTc6UFRxdGBw&riu=http%3a%2f%2fwww.deodarcottage.com%2fwp-content%2fuploads%2f2015%2f12%2f115.jpg&ehk=k%2fOXVZ8HaFj1j%2f2Nc0CeXV%2fQtIYTGz6s9hrgxeQQ%2f1Q%3d&risl=&pid=ImgRaw&r=0",
+  "https://www.savaari.com/blog/wp-content/uploads/2024/11/Jalori-Pass.webp",
+  "https://tse3.mm.bing.net/th/id/OIP.Rt9FI_wIxBi3_uHiv_EnhwHaEK?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+  "https://hikerwolf.com/wp-content/uploads/2020/06/Jalori-Pass-2-800x364.jpg",
 ];
 const rightSideImage = "/img/spiti/chandratal-moonrise.jpg";
 

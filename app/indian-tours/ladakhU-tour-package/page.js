@@ -8,12 +8,12 @@ import Image from 'next/image';
 import { memo } from 'react';
 
 // Images (Update these paths with actual Ladakh general images)
-const heroImage = "/optimised/ladakh-hero-general.webp"; // Replace with general Ladakh hero
+const heroImage = "https://wallpapercave.com/wp/wp7029202.jpg"; // Replace with general Ladakh hero
 const highlightImages = [
-  "/optimised/leh-palace.webp",
-  "/optimised/pangong-lake.webp",
-  "/optimised/nubra-dunes.webp",
-  "/optimised/magnetic-hill.webp",
+  "https://tse1.mm.bing.net/th/id/OIP.p-K7LPFe6esUUG-BcMSGRwHaFj?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+  "https://www.go2ladakh.in/app/webroot/js/ckfinder/userfiles/images/Pangong%20Lake.jpg",
+  "https://wallpapercave.com/wp/wp8172891.jpg",
+  "https://tse1.mm.bing.net/th/id/OIP.XcfM0IltJ_gTYt2bDCE6XQHaD4?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
 ];
 const rightSideImage = "/img/logo.png";
 

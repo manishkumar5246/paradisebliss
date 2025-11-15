@@ -17,12 +17,12 @@ import Image from 'next/image';
 /* ---------------------------  DATA  -------------------------------- */
 /* ------------------------------------------------------------------ */
 
-const heroImage = '/img/spiti-hero.jpg';
+const heroImage = 'https://wallpaperaccess.com/full/7928594.jpg';
 const highlightImages = [
-  '/img/spiti/key-monastery.jpg',
-  '/img/spiti/chicham-bridge.jpg',
-  '/img/spiti/langza.jpg',
-  '/img/spiti/dhankar.jpg',
+  'https://tse1.mm.bing.net/th/id/OIP.8dVxc-LHxdbKBFPkOZjCzQHaEK?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3',
+  'https://tse1.explicit.bing.net/th/id/OIP.poiZj7YnqGNxfPagQ5_jZgHaEU?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3',
+  'https://www.nitworldwideholidays.com/offbeat-destinations-india/himachal-pradesh/img/langza/Langza1.jpg',
+  'https://png.pngtree.com/background/20230401/original/pngtree-famous-indian-tourist-landmark-dhankar-monastry-perched-on-a-cliff-in-picture-image_2229526.jpg',
 ];
 const rightSideImage = '/img/spiti/starry-sky.jpg';
 

@@ -8,12 +8,12 @@ import Image from 'next/image';
 import { memo } from 'react';
 
 // === IMAGES (Update with your actual image paths) ===
-const heroImage = "/optimised/jaipur-ranthambore-hero.webp"; // Hero background
+const heroImage = "/optimised/ranthamborewildlife1.jpg"; // Hero background
 const highlightImages = [
-  "/optimised/amber-fort.webp",           // Amber Fort
-  "/optimised/ranthambore-tiger.webp",    // Tiger Safari
-  "/optimised/hawa-mahal.webp",           // Hawa Mahal
-  "/optimised/ranthambore-fort.webp",     // Ranthambore Fort
+  "https://wallpaperaccess.com/full/8548945.jpg",           // Amber Fort
+  "https://www.tigersafari.net/wp-content/uploads/2020/08/Tiger-safari-bandhavgarh1.jpg",    // Tiger Safari
+  "https://tse2.mm.bing.net/th/id/OIP.Od9Nh-yJfpuJTtXZHo3tCgHaJQ?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",           // Hawa Mahal
+  "https://i.pinimg.com/736x/04/43/06/044306111b7f01f0437aafedd553e2e4.jpg",     // Ranthambore Fort
 ];
 const rightSideImage = "/img/logo.png";
 

@@ -7,12 +7,12 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Image from 'next/image';
 
 // Images (replace with your actual optimized asset paths)
-const heroImage = "/optimised/kerala-hero.jpg"; // lush backwater / houseboat hero
+const heroImage = "/optimised/keralaromenticheaven4.jpg"; // lush backwater / houseboat hero
 const highlightImages = [
-  "/optimised/kerala-munnar.jpg",
-  "/optimised/kerala-thekkady.jpg",
-  "/optimised/kerala-houseboat.jpg",
-  "/optimised/kerala-kochi.jpg",
+  "https://www.holidify.com/images/cmsuploads/compressed/Munnar66_20171216205538.jpg",
+  "https://tse4.mm.bing.net/th/id/OIP.pgt2tG9qknNl4xiMLgBVpAHaFc?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3",
+  "https://alleppeyhouseboatclub.com/wp-content/uploads/2023/10/5-Bedroom-Luxury-Houseboat-in-Alleppey-16.jpg",
+  "https://media.tacdn.com/media/attractions-splice-spp-674x446/07/c8/c3/12.jpg",
 ];
 const rightSideImage = "/img/kerala-logo.png"; // small logo or icon
 

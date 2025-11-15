@@ -8,12 +8,12 @@ import Image from 'next/image';
 import { memo } from 'react';
 
 // Updated images for Jaipur & Pushkar theme (replace with actual image paths)
-const heroImage = "/optimised/jaipur-hero.png";
+const heroImage = "/optimised/jaipurpushkar3.jpg";
 const highlightImages = [
-  "/optimised/amber-fort.webp",
-  "/optimised/pushkar-lake.jpeg",
-  "/optimised/hawa-mahal.jpeg",
-  "/optimised/brahma-temple.png",
+  "https://i.redd.it/4xdg3hnem1251.jpg",
+  "https://ih0.redbubble.net/image.264097054.7490/flat,1000x1000,075,f.jpg",
+  "https://cdn.britannica.com/25/242225-050-72142DF7/Front-facade-of-Palace-of-the-Winds-Hawa-Mahal-Jaipur-Rajasthan-India.jpg",
+  "https://ih0.redbubble.net/image.264097054.7490/flat,1000x1000,075,f.jpg",
 ];
 const rightSideImage = "/img/logo.png";
 

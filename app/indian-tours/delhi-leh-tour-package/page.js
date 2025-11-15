@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { memo } from 'react';
 
 // Updated images for Delhi to Leh Tour (replace with actual image paths)
-const heroImage = "/optimised/manali-leh-highway.jpg";
+const heroImage = "public/optimised/leh ladakh explorer.jpg";
 const highlightImages = [
   "/optimised/khardung-la-pass.webp",
   "/optimised/pangong-lake.jpeg",
